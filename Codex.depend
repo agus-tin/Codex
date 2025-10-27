@@ -1,10 +1,10 @@
 # depslib dependency file v1.0
-1761330370 source:d:\repositorios\codex\fecha.cpp
+1761591373 source:d:\repositorios\codex\fecha.cpp
 	"Fecha.h"
 	<iostream>
 	<ctime>
 
-1761330370 d:\repositorios\codex\fecha.h
+1761590831 d:\repositorios\codex\fecha.h
 
 1571584339 source:d:\repositorios\codex\test.cpp
 	"rlutil.h"
@@ -30,4 +30,18 @@
 1761332675 source:d:\repositorios\codex\main.cpp
 	<iostream>
 	"rlutil.h"
+
+1761591543 source:d:\repositorios\codex\socio.cpp
+	<iostream>
+	"Socio.h"
+
+1761590585 source:d:\repositorios\codex\persona.cpp
+	"Persona.h"
+
+1761590561 d:\repositorios\codex\persona.h
+	<string>
+	"Fecha.h"
+
+1761591559 d:\repositorios\codex\socio.h
+	"Persona.h"
 

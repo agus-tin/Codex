@@ -1,25 +1,30 @@
 #include "Persona.h"
-#include <cctype> // Para funciones que trabajan con caracteres individuales.
 
-bool validarDni(const std::string& DNI)
+bool validarDni(int DNI)
 {
-    if (DNI.size() != 8)
+    int digitos = std::to_string(std::abs(DNI)).size();
+
+    if (digitos != 8)
     {
         return false;
-    }
-
-    for (char c : DNI)
-    {
-        if (!std::isdigit(static_cast<unsigned char>(c)))
-        {
-            return false;
-        }
     }
 
     return true;
 }
 
-bool validarCadena(const std::string& cadena, size_t tamanio)
+bool validarTelefono(int telefono)
+{
+    int digitos = std::to_string(std::abs(telefono)).size();
+
+    if (digitos != 10)
+    {
+        return false;
+    }
+
+    return true;
+}
+
+bool validarCadena(std::string& cadena, size_t tamanio)
 {
     if (cadena.empty())
     {
@@ -34,7 +39,7 @@ bool validarCadena(const std::string& cadena, size_t tamanio)
     return true;
 }
 
-bool validarCorreo(const std::string& correo)
+bool validarCorreo(std::string& correo)
 {
     size_t arroba = correo.find('@'); // Busca la primera aparición de '@'.
     size_t punto = correo.rfind('.'); // Busca la última aparición de '.'.
@@ -62,22 +67,21 @@ bool validarCorreo(const std::string& correo)
     return true;
 }
 
-Persona::Persona(const std::string& DNI,
-                 const std::string& nombre,
-                 const std::string& apellido,
-                 const Fecha& fechaNacimiento,
-                 bool estado,
-                 const std::string& correo)
+Persona::Persona()
+    : _DNI{ 0 }, _nombre{ "" }, _apellido{ "" }, _fechaNacimiento{}, _telefono{ 0 }, _estado{ false }, _correo{ "" }
+{}
+
+Persona::Persona(int DNI, std::string& nombre, std::string& apellido, Fecha& fechaNacimiento, int telefono, bool estado, std::string& correo)
+    : _fechaNacimiento{ fechaNacimiento }, _estado{ estado }
 {
     setDni(DNI);
     setNombre(nombre);
     setApellido(apellido);
-    _fechaNacimiento = fechaNacimiento;
-    _estado = estado;
+    setTelefono(telefono);
     setCorreo(correo);
 }
 
-void Persona::setDni(const std::string& DNI)
+void Persona::setDni(int DNI)
 {
     if (validarDni(DNI))
     {
@@ -85,7 +89,7 @@ void Persona::setDni(const std::string& DNI)
     }
 }
 
-void Persona::setNombre(const std::string& nombre)
+void Persona::setNombre(std::string& nombre)
 {
     if (validarCadena(nombre, 30))
     {
@@ -93,7 +97,7 @@ void Persona::setNombre(const std::string& nombre)
     }
 }
 
-void Persona::setApellido(const std::string& apellido)
+void Persona::setApellido(std::string& apellido)
 {
     if (validarCadena(apellido, 30))
     {
@@ -110,12 +114,20 @@ void Persona::setFechaNacimiento(int dia, int mes, int anio)
     _fechaNacimiento = fecha;
 }
 
+void Persona::setTelefono(int telefono)
+{
+    if (validarTelefono(telefono))
+    {
+        _telefono = telefono;
+    }
+}
+
 void Persona::setEstado(bool estado)
 {
     _estado = estado;
 }
 
-void Persona::setCorreo(const std::string& correo)
+void Persona::setCorreo(std::string& correo)
 {
     if (validarCorreo(correo))
     {

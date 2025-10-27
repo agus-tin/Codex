@@ -21,33 +21,9 @@ Fecha::Fecha(int dia, int mes, int anio) {
     }
 }
 
-void Fecha::cargar(){
-    int dia, mes, anio;
-    cout<<"INGRESE EL DIA: ";
-    cin>>dia;
-    cout<<"INGRESE EL MES: ";
-    cin>>mes;
-    cout<<"INGRESE EL ANIO: ";
-    cin>>anio;
-    setFecha(dia, mes, anio);
-}
-
-void Fecha::cargarMesAnio(){
-    int dia=1, mes, anio;
-    cout<<"INGRESE EL MES: ";
-    cin>>mes;
-    cout<<"INGRESE EL ANIO: ";
-    cin>>anio;
-    setMes(mes);
-    setAnio(anio);
-}
-
 void Fecha::mostrar(){
-    cout<<getDia()<<"/"<<getMes()<<"/"<<getAnio()<<endl;
-}
-
-void Fecha::mostrarMesAnio(){
-    cout<<getMes()<<"/"<<getAnio()<<endl;
+    cout<<getDia()<<"/"<<getMes()<<"/"<<getAnio()<< '\n'; // Esto habría que cambiarlo por un operator overload.
+                                                         // Y se puede usar simplemente _dia, _mes, _anio, mostrar() ya tiene acceso.
 }
 
 void Fecha::setDia(int dia){
@@ -105,8 +81,18 @@ void Fecha::setFecha(int dia, int mes, int anio) {
         }
 
     if (incorrecto) {
-        cout << "La fecha es incorrecta. Intenta de nuevo." << endl;
-        cargar();
+        cout << "La fecha es incorrecta. Intenta de nuevo." << '\n';
+
+        int dia, mes, anio;
+
+        cout<<"Ingrese el dia: ";
+        cin>>dia;
+        cout<<"Ingrese el mes: ";
+        cin>>mes;
+        cout<<"Ingrese el anio: ";
+        cin>>anio;
+
+        setFecha(dia, mes, anio);
     }
     else {
         _dia = dia;
@@ -114,9 +100,5 @@ void Fecha::setFecha(int dia, int mes, int anio) {
         _anio = anio;
     }
 }
-
-int Fecha::getDia() { return _dia; }
-int Fecha::getMes() { return _mes; }
-int Fecha::getAnio() { return _anio; }
 
 
