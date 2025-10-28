@@ -4,10 +4,10 @@
 Socio::Socio(float cuota)
     : _cuota{ cuota }
 {
-    _socioID = siguienteID++;
+    _socioID = socioID++;
 }
 
-int Socio::siguienteID = 1;
+int Socio::socioID = 1;
 
 void Socio::setCuota(float cuota)
 {

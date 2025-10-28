@@ -10,7 +10,7 @@ private:
     float _cuota;
     bool _impago{ false };
 
-    static int siguienteID;
+    static int socioID;
 
 public:
     Socio(float cuota);
