@@ -39,6 +39,9 @@
 		<Unit filename="Autor.h" />
 		<Unit filename="Fecha.cpp" />
 		<Unit filename="Fecha.h" />
+		<Unit filename="Genero.h" />
+		<Unit filename="Libro.cpp" />
+		<Unit filename="Libro.h" />
 		<Unit filename="Persona.cpp" />
 		<Unit filename="Persona.h" />
 		<Unit filename="Socio.cpp" />

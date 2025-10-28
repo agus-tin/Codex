@@ -45,3 +45,20 @@
 1761617376 d:\repositorios\codex\socio.h
 	"Persona.h"
 
+1761617837 source:d:\repositorios\codex\autor.cpp
+	"Autor.h"
+
+1761617817 d:\repositorios\codex\autor.h
+	<string>
+
+1761679126 source:d:\repositorios\codex\libro.cpp
+	"Libro.h"
+
+1761678967 d:\repositorios\codex\libro.h
+	<string>
+	"Autor.h"
+	"Fecha.h"
+	"Genero.h"
+
+1761679457 d:\repositorios\codex\genero.h
+
