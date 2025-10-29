@@ -1,6 +1,7 @@
 #ifndef AUTOR_H_INCLUDED
 #define AUTOR_H_INCLUDED
 
+#include <iostream>
 #include <string>
 
 class Autor
@@ -18,6 +19,8 @@ public:
     int getAutorID() const { return _autorID; }
     std::string getNombre() const { return _nombre; }
     std::string getApellido() const { return _apellido; }
+
+    friend std::ostream& operator<<(std::ostream& os, const Autor& autor);
 };
 
 #endif // AUTOR_H_INCLUDED

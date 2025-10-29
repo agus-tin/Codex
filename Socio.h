@@ -13,6 +13,7 @@ private:
     static int socioID;
 
 public:
+    Socio(); // constructor default.
     Socio(float cuota);
 
     int getSocioID() const { return _socioID; }
@@ -22,9 +23,7 @@ public:
     void setCuota(float cuota);
     void setImpago(bool impago);
 
-    void guardar();
-    void cargar();
-    void mostrar();
+    friend std::ostream& operator<<(std::ostream& os, const Socio& socio);
 };
 
 #endif // SOCIO_H_INCLUDED

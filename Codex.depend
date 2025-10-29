@@ -1,10 +1,11 @@
 # depslib dependency file v1.0
-1761591373 source:d:\repositorios\codex\fecha.cpp
+1761689789 source:d:\repositorios\codex\fecha.cpp
 	"Fecha.h"
 	<iostream>
 	<ctime>
 
-1761590831 d:\repositorios\codex\fecha.h
+1761689519 d:\repositorios\codex\fecha.h
+	<iostream>
 
 1571584339 source:d:\repositorios\codex\test.cpp
 	"rlutil.h"
@@ -31,34 +32,47 @@
 	<iostream>
 	"rlutil.h"
 
-1761617377 source:d:\repositorios\codex\socio.cpp
+1761702033 source:d:\repositorios\codex\socio.cpp
 	<iostream>
 	"Socio.h"
 
-1761590585 source:d:\repositorios\codex\persona.cpp
+1761702005 source:d:\repositorios\codex\persona.cpp
 	"Persona.h"
 
 1761590561 d:\repositorios\codex\persona.h
 	<string>
 	"Fecha.h"
 
-1761617376 d:\repositorios\codex\socio.h
+1761701914 d:\repositorios\codex\socio.h
 	"Persona.h"
 
-1761617837 source:d:\repositorios\codex\autor.cpp
+1761688515 source:d:\repositorios\codex\autor.cpp
 	"Autor.h"
 
-1761617817 d:\repositorios\codex\autor.h
+1761688365 d:\repositorios\codex\autor.h
+	<iostream>
 	<string>
 
-1761679126 source:d:\repositorios\codex\libro.cpp
+1761703326 source:d:\repositorios\codex\libro.cpp
 	"Libro.h"
 
-1761678967 d:\repositorios\codex\libro.h
+1761699048 d:\repositorios\codex\libro.h
+	<iostream>
 	<string>
 	"Autor.h"
 	"Fecha.h"
 	"Genero.h"
 
-1761679457 d:\repositorios\codex\genero.h
+1761689109 d:\repositorios\codex\genero.h
+	<iostream>
+
+1761701866 source:d:\repositorios\codex\prestamo.cpp
+	"Prestamo.h"
+
+1761701778 d:\repositorios\codex\prestamo.h
+	<iostream>
+	<vector>
+	"Libro.h"
+	"Socio.h"
+	"Fecha.h"
 

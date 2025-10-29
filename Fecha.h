@@ -1,6 +1,8 @@
 #ifndef FECHA_H_INCLUDED
 #define FECHA_H_INCLUDED
 
+#include <iostream>
+
 class Fecha
 {
 private:
@@ -11,8 +13,6 @@ private:
 public:
     Fecha(int dia=0, int mes=0, int anio=0);
 
-    void mostrar();
-
     int getDia() const { return _dia; }
     int getMes() const { return _mes; }
     int getAnio() const { return _anio; }
@@ -22,6 +22,7 @@ public:
     void setAnio(int anio);
     void setFecha(int dia, int mes, int anio);
 
+    friend std::ostream& operator<<(std::ostream& os, const Fecha& fecha);
 };
 
 #endif // CLSFECHA_H_INCLUDED

@@ -21,11 +21,6 @@ Fecha::Fecha(int dia, int mes, int anio) {
     }
 }
 
-void Fecha::mostrar(){
-    cout<<getDia()<<"/"<<getMes()<<"/"<<getAnio()<< '\n'; // Esto habría que cambiarlo por un operator overload.
-                                                         // Y se puede usar simplemente _dia, _mes, _anio, mostrar() ya tiene acceso.
-}
-
 void Fecha::setDia(int dia){
     if(dia <= 31 && dia > 0) _dia=dia;
 }
@@ -101,4 +96,9 @@ void Fecha::setFecha(int dia, int mes, int anio) {
     }
 }
 
+std::ostream& operator<<(std::ostream& os, const Fecha& fecha)
+{
+    os << fecha.getDia() << "/" << fecha.getMes() << "/" << fecha.getAnio() << '\n';
 
+    return os;
+}

@@ -68,7 +68,7 @@ bool validarCorreo(std::string& correo)
 }
 
 Persona::Persona()
-    : _DNI{ 0 }, _nombre{ "" }, _apellido{ "" }, _fechaNacimiento{}, _telefono{ 0 }, _estado{ false }, _correo{ "" }
+    : _DNI{}, _nombre{ "" }, _apellido{ "" }, _fechaNacimiento{}, _telefono{}, _estado{ false }, _correo{ "" }
 {}
 
 Persona::Persona(int DNI, std::string& nombre, std::string& apellido, Fecha& fechaNacimiento, int telefono, bool estado, std::string& correo)

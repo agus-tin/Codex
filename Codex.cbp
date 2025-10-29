@@ -44,6 +44,8 @@
 		<Unit filename="Libro.h" />
 		<Unit filename="Persona.cpp" />
 		<Unit filename="Persona.h" />
+		<Unit filename="Prestamo.cpp" />
+		<Unit filename="Prestamo.h" />
 		<Unit filename="Socio.cpp" />
 		<Unit filename="Socio.h" />
 		<Unit filename="main.cpp" />

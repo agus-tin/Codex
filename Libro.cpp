@@ -26,16 +26,30 @@ bool validadISBN(std::string ISBN)
     return ISBN[12] - '0' == check;
 }
 
-Libro::Libro(std::string ISBN, std::string titulo, Autor autor, std::string editorial, int cantidadEjemplares, Genero genero, bool estado)
-    : _titulo{ titulo }, _autor{ autor }, _editorial{ editorial }, _cantidadEjemplares{ cantidadEjemplares }, _genero{ genero }, _estado{ estado }
+Libro::Libro(std::string ISBN, std::string titulo, Autor autor, std::string editorial, Fecha fechaPublicacion, int cantidadEjemplares, Genero genero)
+    : _titulo{ titulo }, _autor{ autor }, _editorial{ editorial }, _fechaPublicacion{ fechaPublicacion }, _cantidadEjemplares{ cantidadEjemplares }, _genero{ genero }
 {
     setISBN(ISBN);
 }
 
-void Libro::setISBN(std::string ISBN)
+void Libro::setISBN(std::string& ISBN)
 {
     if (validadISBN(ISBN))
     {
         _ISBN = ISBN;
     }
+}
+
+std::ostream& operator<<(std::ostream& os, const Libro& libro)
+{
+    os << "  ISBN: " << libro._ISBN << '\n';
+    os << "  Titulo:  " << libro._titulo << '\n';
+    os << "  Autor: " << libro._autor << '\n';
+    os << "  Genero: " << libro._genero << '\n';
+    os << "  Editorial: " << libro._editorial << '\n';
+    os << "  Fecha de publicacion: " << libro._fechaPublicacion << '\n';
+    os << "  Estado: " << (libro._estado ? "Disponible" : "No disponible") << '\n';
+    if (libro._estado) os << "Cantidad de ejemplares: " << libro._cantidadEjemplares << '\n';
+
+    return os;
 }
