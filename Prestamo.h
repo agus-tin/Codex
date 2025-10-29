@@ -22,6 +22,7 @@ private:
 public:
     Prestamo(Socio socio, Fecha fechaPrestamo, Fecha fechaDevolucion);
 
+    int getPrestamoID() const { return _prestamoID; }
     Fecha getFechaPrestamo() const { return _fechaPrestamo; }
     Fecha getFechaDevolucion() const { return _fechaDevolucion; }
 
@@ -32,6 +33,7 @@ public:
     void quitarLibro(std::string ISBN);
 
     friend std::ostream& operator<<(std::ostream& os, const Prestamo& prestamo);
+    bool operator==(const Prestamo& prestamo) const { return _prestamoID == prestamo.getPrestamoID(); }
 };
 
 #endif // PRESTAMO_H_INCLUDED

@@ -98,7 +98,7 @@ void Fecha::setFecha(int dia, int mes, int anio) {
 
 std::ostream& operator<<(std::ostream& os, const Fecha& fecha)
 {
-    os << fecha.getDia() << "/" << fecha.getMes() << "/" << fecha.getAnio() << '\n';
+    os << fecha.getDia() << "/" << fecha.getMes() << "/" << fecha.getAnio();
 
     return os;
 }

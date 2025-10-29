@@ -1,51 +1,49 @@
-#include <iostream>
 #include "Admin.h"
 
-void Admin::setadminID(int adminID)
+std::string rolString(Rol rol)
 {
-    if (adminID > 0)
+    switch(rol)
     {
-        _adminID = adminID;
+        case Rol::Auxiliar:       return "Auxiliar";
+        case Rol::Bibliotecario:  return "Bibliotecario";
+        case Rol::SysAdmin:       return "SysAdmin";
+        default:                  return "Auxiliar";
     }
 }
 
-void Admin::setusuario(std::string usuario)
+int Admin::adminID = 1;
+
+Admin::Admin()
+    : _usuario{ "usuario" }, _contrasenia{ "contrasenia" }, _rol{}
+{}
+
+Admin::Admin(std::string usuario, std::string contrasenia, Rol rol)
+    : _usuario{ usuario }, _contrasenia{ contrasenia }, _rol{ rol }
+{
+    _adminID = adminID++;
+}
+
+void Admin::setUsuario(std::string usuario)
 {
     _usuario = usuario;
 }
 
-void Admin::setcontrasenia(std::string contrasenia)
+void Admin::setContrasenia(std::string contrasenia)
 {
     _contrasenia = contrasenia;
 }
 
-void Admin::setrol(std::string& rol)
+void Admin::setRol(Rol rol)
 {
     _rol = rol;
 }
 
-void Admin::cargar()
+std::ostream& operator<<(std::ostream& os, const Admin& admin)
 {
-    // En esta etapa solo cargamos datos por consola
-    cout << "Ingrese ID del administrador: ";
-    cin >> _adminID;
-    cin.ignore();
+    os << "AdminID: " << admin.getAdminID() << '\n';
+    os << "Nombre: " << admin.getNombre() << " " << admin.getApellido() << '\n';
+    Rol rol = admin.getRol();
+    os << "Rol: " << rolString(rol);
 
-    cout << "Ingrese usuario: ";
-    getline(cin, _usuario);
-
-    cout << "Ingrese contrasenia: ";
-    getline(cin, _contrasenia);
-
-    cout << "Ingrese rol: ";
-    getline(cin, _rol);
-}
-
-void Admin::mostrar()
-{
-    cout << "-----------------------------" << std::endl;
-    cout << "ID Admin: " << _adminID << std::endl;
-    cout << "Usuario: " << _usuario << std::endl;
-    cout << "Rol: " << _rol << std::endl;
-    cout << "-----------------------------" << std::endl;
+    return os;
 }

@@ -35,8 +35,12 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Admin.cpp" />
+		<Unit filename="Admin.h" />
 		<Unit filename="Autor.cpp" />
 		<Unit filename="Autor.h" />
+		<Unit filename="Biblioteca.cpp" />
+		<Unit filename="Biblioteca.h" />
 		<Unit filename="Fecha.cpp" />
 		<Unit filename="Fecha.h" />
 		<Unit filename="Genero.h" />
@@ -46,6 +50,7 @@
 		<Unit filename="Persona.h" />
 		<Unit filename="Prestamo.cpp" />
 		<Unit filename="Prestamo.h" />
+		<Unit filename="Rol.h" />
 		<Unit filename="Socio.cpp" />
 		<Unit filename="Socio.h" />
 		<Unit filename="main.cpp" />

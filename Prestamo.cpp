@@ -26,12 +26,15 @@ void Prestamo::agregarLibro(Libro libro)
 
 void Prestamo::quitarLibro(std::string ISBN)
 {
-    for (int i = 0; i < _librosPrestados.size(); ++i)
+    for (size_t i = 0; i < _librosPrestados.size(); ++i)
     {
         if (_librosPrestados[i].getISBN() == ISBN)
         {
-            _librosPrestados.erase(_librosPrestados.begin() + i); // _librosPrestados.begin() es un iterador que apunta al índice 0.
-                                                                  // Sumamos i para moverlo a la posición del match.
+            // _librosPrestados.begin() es un iterador que apunta al índice 0.
+            // Sumamos i para moverlo a la posición del match.
+
+            _librosPrestados.erase(_librosPrestados.begin() + i);
+
             return;
         }
     }

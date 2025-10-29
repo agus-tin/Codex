@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1761689789 source:d:\repositorios\codex\fecha.cpp
+1761771794 source:d:\repositorios\codex\fecha.cpp
 	"Fecha.h"
 	<iostream>
 	<ctime>
@@ -28,37 +28,47 @@
 	<sys/types.h>
 	<sys/time.h>
 
-1761332675 source:d:\repositorios\codex\main.cpp
+1761776626 source:d:\repositorios\codex\main.cpp
 	<iostream>
+	<vector>
+	<string>
 	"rlutil.h"
+	"Biblioteca.h"
+	"Libro.h"
+	"Prestamo.h"
+	"Admin.h"
+	"Socio.h"
+	"Genero.h"
+	"Rol.h"
 
-1761702033 source:d:\repositorios\codex\socio.cpp
+1761703456 source:d:\repositorios\codex\socio.cpp
 	<iostream>
 	"Socio.h"
 
-1761702005 source:d:\repositorios\codex\persona.cpp
+1761776073 source:d:\repositorios\codex\persona.cpp
 	"Persona.h"
 
 1761590561 d:\repositorios\codex\persona.h
 	<string>
 	"Fecha.h"
 
-1761701914 d:\repositorios\codex\socio.h
+1761702248 d:\repositorios\codex\socio.h
 	"Persona.h"
 
-1761688515 source:d:\repositorios\codex\autor.cpp
+1761771781 source:d:\repositorios\codex\autor.cpp
 	"Autor.h"
 
-1761688365 d:\repositorios\codex\autor.h
+1761770658 d:\repositorios\codex\autor.h
 	<iostream>
 	<string>
 
-1761703326 source:d:\repositorios\codex\libro.cpp
+1761772368 source:d:\repositorios\codex\libro.cpp
 	"Libro.h"
 
-1761699048 d:\repositorios\codex\libro.h
+1761777707 d:\repositorios\codex\libro.h
 	<iostream>
 	<string>
+	<fstream>
 	"Autor.h"
 	"Fecha.h"
 	"Genero.h"
@@ -66,13 +76,34 @@
 1761689109 d:\repositorios\codex\genero.h
 	<iostream>
 
-1761701866 source:d:\repositorios\codex\prestamo.cpp
+1761771564 source:d:\repositorios\codex\prestamo.cpp
 	"Prestamo.h"
+	<algorithm>
 
-1761701778 d:\repositorios\codex\prestamo.h
+1761771157 d:\repositorios\codex\prestamo.h
 	<iostream>
 	<vector>
 	"Libro.h"
 	"Socio.h"
 	"Fecha.h"
+
+1761775432 source:d:\repositorios\codex\admin.cpp
+	"Admin.h"
+
+1761775038 d:\repositorios\codex\admin.h
+	<iostream>
+	"Persona.h"
+	"Rol.h"
+
+1761772103 source:d:\repositorios\codex\biblioteca.cpp
+	"Biblioteca.h"
+
+1761776319 d:\repositorios\codex\biblioteca.h
+	<vector>
+	<string>
+	"Libro.h"
+	"Prestamo.h"
+	"Admin.h"
+
+1761772693 d:\repositorios\codex\rol.h
 

@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <fstream>
 #include "Autor.h"
 #include "Fecha.h"
 #include "Genero.h"
@@ -20,7 +21,8 @@ private:
     bool _estado = true;
 
 public:
-    Libro(std::string ISBN, std::string titulo, Autor autor, std::string editorial, Fecha fechaPublicacion, int cantidadEjemplares, Genero genero);
+    Libro();
+    Libro(std::string ISBN, std::string titulo, Autor autor, std::string editorial, Fecha fechaPublicacion, int cantidadEjemplares, Genero genero, bool estado);
 
     std::string getISBN() const { return _ISBN; }
     std::string getTitulo() const { return _titulo; }
@@ -35,7 +37,11 @@ public:
     void setCantidadEjemplares(int cantidadEjemplares) { _cantidadEjemplares = cantidadEjemplares; }
     void setEstado(bool estado) { _estado = estado; }
 
+    bool guardar();
+    bool cargar(int pos);
+
     friend std::ostream& operator<<(std::ostream& os, const Libro& libro);
+    bool operator==(const Libro& libro) const { return _ISBN == libro.getISBN(); }
 };
 
 

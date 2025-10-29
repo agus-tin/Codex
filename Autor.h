@@ -14,6 +14,7 @@ private:
     static int autorID;
 
 public:
+    Autor();
     Autor(std::string nombre, std::string apellido);
 
     int getAutorID() const { return _autorID; }
