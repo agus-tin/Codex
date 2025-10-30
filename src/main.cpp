@@ -17,6 +17,7 @@ using namespace std;
 int main()
 {
     // Inicialización
+
     Biblioteca biblioteca;
 
     // Menu inicial
@@ -32,7 +33,7 @@ int main()
         cout << "1. Iniciar sesion." << '\n';
         cout << "2. Salir." << "\n\n";
 
-        if (!(cin >> opcionMenuInicial))
+        if (!(cin >> opcionMenuInicial)) // Para rechazar cosas que no son ints.
         {
             cin.clear(); // Limpia el estado de input stream.
             cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Resetea el input stream.
@@ -59,7 +60,7 @@ int main()
         {
             system("cls");
 
-            cout << "Opcion invalida. Por favor ingrese solo el numero de su opcion." << "\n\n";
+            cout << "Opcion invalida. Por favor ingrese un numero de los ofrecidos." << "\n\n";
 
             system("pause");
             system("cls");
@@ -67,9 +68,6 @@ int main()
     }
 
     // Inicio de sesion
-
-    /// NOTAS:
-    /// -Un ADMIN tiene un "bool estado", hay que chequear si esta habilitado o no al iniciar sesion.
 
     while (true)
     {
@@ -89,12 +87,14 @@ int main()
         biblioteca.agregarAdmin(admin1);
 
         bool match = false;
+        bool adminEstado = false;
 
         for (size_t i = 0; i < biblioteca.admins.size(); ++i)
         {
-            if (biblioteca.admins[i].getUsuario() == usuario && biblioteca.admins[i].getEstado())
+            if (biblioteca.admins[i].getUsuario() == usuario)
             {
                 match = true;
+                adminEstado = biblioteca.admins[i].getEstado();
                 break;
             }
         }
@@ -110,10 +110,71 @@ int main()
             system("pause");
             system("cls");
         }
-        else
+        else if (match && !adminEstado)
+        {
+            system("cls");
+
+            cout << "Usuario inhabilitado." << "\n\n";
+
+            system("pause");
+            system("cls");
+        }
+        else if (match && adminEstado)
         {
             break;
         }
+
+    }
+
+    // Menu principal
+
+    while (true)
+    {
+        int opcionMenuPrincipal;
+
+        cout << "Menu principal" << "\n\n";
+
+        cout << "Seleccione una opcion de las siguientes:" << "\n\n";
+
+        cout << "1. Libros." << '\n';
+        cout << "2. Prestamos" << '\n';
+        cout << "3. ." << '\n';
+        cout << "4. Cuota." << "\n\n";
+
+        if (!(cin >> opcionMenuPrincipal)) // Para rechazar cosas que no son ints.
+        {
+            cin.clear(); // Limpia el estado de input stream.
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Resetea el input stream.
+            system("cls");
+
+            cout << "Opcion invalida. Por favor ingrese solo el numero de su opcion." << "\n\n";
+
+            system("pause");
+            system("cls");
+            continue;
+        }
+
+        switch (opcionMenuPrincipal)
+        {
+            case 1:
+                break;
+
+            case 2:
+                break;
+
+            case 3:
+                break;
+
+            default:
+                system("cls");
+
+                cout << "Opcion invalida. Por favor ingrese un numero de los ofrecidos." << "\n\n";
+
+                system("pause");
+                system("cls");
+                break;
+        }
+
     }
 
     return 0;

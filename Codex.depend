@@ -28,7 +28,7 @@
 	<sys/types.h>
 	<sys/time.h>
 
-1761776626 source:d:\repositorios\codex\main.cpp
+1761821979 source:d:\repositorios\codex\main.cpp
 	<iostream>
 	<vector>
 	<string>
@@ -62,7 +62,7 @@
 	<iostream>
 	<string>
 
-1761772368 source:d:\repositorios\codex\libro.cpp
+1761778143 source:d:\repositorios\codex\libro.cpp
 	"Libro.h"
 
 1761777707 d:\repositorios\codex\libro.h
@@ -106,4 +106,78 @@
 	"Admin.h"
 
 1761772693 d:\repositorios\codex\rol.h
+
+1761775432 source:d:\repositorios\codex\src\admin.cpp
+	"Admin.h"
+
+1761775038 d:\repositorios\codex\include\admin.h
+	<iostream>
+	"Persona.h"
+	"Rol.h"
+
+1761590561 d:\repositorios\codex\include\persona.h
+	<string>
+	"Fecha.h"
+
+1761689519 d:\repositorios\codex\include\fecha.h
+	<iostream>
+
+1761772693 d:\repositorios\codex\include\rol.h
+
+1761771781 source:d:\repositorios\codex\src\autor.cpp
+	"Autor.h"
+
+1761770658 d:\repositorios\codex\include\autor.h
+	<iostream>
+	<string>
+
+1761772103 source:d:\repositorios\codex\src\biblioteca.cpp
+	"Biblioteca.h"
+
+1761776319 d:\repositorios\codex\include\biblioteca.h
+	<vector>
+	<string>
+	"Libro.h"
+	"Prestamo.h"
+	"Admin.h"
+
+1761777707 d:\repositorios\codex\include\libro.h
+	<iostream>
+	<string>
+	<fstream>
+	"Autor.h"
+	"Fecha.h"
+	"Genero.h"
+
+1761689109 d:\repositorios\codex\include\genero.h
+	<iostream>
+
+1761771157 d:\repositorios\codex\include\prestamo.h
+	<iostream>
+	<vector>
+	"Libro.h"
+	"Socio.h"
+	"Fecha.h"
+
+1761702248 d:\repositorios\codex\include\socio.h
+	"Persona.h"
+
+1761771794 source:d:\repositorios\codex\src\fecha.cpp
+	"Fecha.h"
+	<iostream>
+	<ctime>
+
+1761778143 source:d:\repositorios\codex\src\libro.cpp
+	"Libro.h"
+
+1761776073 source:d:\repositorios\codex\src\persona.cpp
+	"Persona.h"
+
+1761771564 source:d:\repositorios\codex\src\prestamo.cpp
+	"Prestamo.h"
+	<algorithm>
+
+1761703456 source:d:\repositorios\codex\src\socio.cpp
+	<iostream>
+	"Socio.h"
 
