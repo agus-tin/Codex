@@ -181,3 +181,30 @@
 	<iostream>
 	"Socio.h"
 
+1761826388 source:d:\repositorios\codex\src\main.cpp
+	<iostream>
+	<vector>
+	<string>
+	"rlutil.h"
+	"Biblioteca.h"
+	"Libro.h"
+	"Prestamo.h"
+	"Admin.h"
+	"Socio.h"
+	"Genero.h"
+	"Rol.h"
+
+1571584339 d:\repositorios\codex\include\rlutil.h
+	<iostream>
+	<string>
+	<cstdio>
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<conio.h>
+	<termios.h>
+	<unistd.h>
+	<sys/ioctl.h>
+	<sys/types.h>
+	<sys/time.h>
+
