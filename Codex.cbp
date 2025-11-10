@@ -45,7 +45,6 @@
 		<Unit filename="include/Prestamo.h" />
 		<Unit filename="include/Rol.h" />
 		<Unit filename="include/Socio.h" />
-		<Unit filename="include/archivoAdmin.h" />
 		<Unit filename="include/rlutil.h" />
 		<Unit filename="src/Admin.cpp" />
 		<Unit filename="src/Autor.cpp" />
@@ -55,7 +54,6 @@
 		<Unit filename="src/Persona.cpp" />
 		<Unit filename="src/Prestamo.cpp" />
 		<Unit filename="src/Socio.cpp" />
-		<Unit filename="src/archivoAdmin.cpp" />
 		<Unit filename="src/main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
