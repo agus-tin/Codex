@@ -13,6 +13,10 @@
 #include "Rol.h"
 
 using namespace std;
+void menuSocios();
+void menuLibros();
+void menuPrestamos();
+void menuAdministradores();
 
 int main()
 {
