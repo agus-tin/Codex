@@ -2,26 +2,11 @@
 #include "Socio.h"
 
 Socio::Socio()
-    : _cuota{}
-{}
-
-int Socio::socioID = 1;
-
-Socio::Socio(float cuota)
-    : _cuota{ cuota }
 {
     _socioID = socioID++;
 }
 
-void Socio::setCuota(float cuota)
-{
-    _cuota = cuota;
-}
-
-void Socio::setImpago(bool impago)
-{
-    _impago = impago;
-}
+int Socio::socioID = 1;
 
 std::ostream& operator<<(std::ostream& os, const Socio& socio)
 {

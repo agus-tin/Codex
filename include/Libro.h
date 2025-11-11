@@ -2,19 +2,18 @@
 #define LIBRO_H_INCLUDED
 
 #include <iostream>
-#include <string>
+#include <cstring>
 #include <fstream>
-#include "Autor.h"
 #include "Fecha.h"
 #include "Genero.h"
 
 class Libro
 {
 private:
-    std::string _ISBN;
-    std::string _titulo;
-    Autor _autor;
-    std::string _editorial;
+    char _ISBN[14];
+    char _titulo[50];
+    char _autor[50];
+    char _editorial[50];
     Fecha _fechaPublicacion;
     int _cantidadEjemplares;
     Genero _genero;
@@ -22,18 +21,18 @@ private:
 
 public:
     Libro();
-    Libro(std::string ISBN, std::string titulo, Autor autor, std::string editorial, Fecha fechaPublicacion, int cantidadEjemplares, Genero genero, bool estado);
+    Libro(const char* ISBN, const char* titulo, const char* autor, const char* editorial, Fecha fechaPublicacion, int cantidadEjemplares, Genero genero, bool estado);
 
-    std::string getISBN() const { return _ISBN; }
-    std::string getTitulo() const { return _titulo; }
-    Autor getAutor() const { return _autor; }
-    std::string getEditorial() const { return _editorial; }
+    const char* getISBN() const { return _ISBN; }
+    const char* getTitulo() const { return _titulo; }
+    const char* getAutor() const { return _autor; }
+    const char* getEditorial() const { return _editorial; }
     Fecha getFechaPubliacion() const { return _fechaPublicacion; }
     int getCantidadEjemplares() const { return _cantidadEjemplares; }
     Genero getGenero() const { return _genero; }
     bool getEstado() const { return _estado; }
 
-    void setISBN(std::string& ISBN);
+    void setISBN(const char* ISBN);
     void setCantidadEjemplares(int cantidadEjemplares) { _cantidadEjemplares = cantidadEjemplares; }
     void setEstado(bool estado) { _estado = estado; }
 
@@ -41,9 +40,9 @@ public:
     bool cargar(int pos);
 
     friend std::ostream& operator<<(std::ostream& os, const Libro& libro);
-    bool operator==(const Libro& libro) const { return _ISBN == libro.getISBN(); }
+    bool operator==(const Libro& libro) const { return std::strcmp(_ISBN, libro.getISBN()) == 0; }
 };
 
-
+bool validarISBN(const char* ISBN);
 
 #endif // LIBRO_H_INCLUDED

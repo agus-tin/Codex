@@ -1,93 +1,76 @@
 #include "Persona.h"
+#include <cctype>
+#include <cstdlib>
+#include <cstdio>
+#include <cstring>
 
 bool validarDni(int DNI)
 {
-    int digitos = std::to_string(std::abs(DNI)).size();
+    int digitos = 0;
 
-    if (digitos != 8)
+    int temp = std::abs(DNI);
+    while (temp > 0)
     {
-        return false;
+        // Dividir por 10 sirve par contar dígitos porque cuenta las posiciones hasta llegar a 0.
+        temp /= 10;
+        digitos++;
     }
-
-    return true;
+    return digitos == 8;
 }
 
 bool validarTelefono(int telefono)
 {
-    int digitos = std::to_string(std::abs(telefono)).size();
-
-    if (digitos != 10)
+    int digitos = 0;
+    int temp = std::abs(telefono);
+    while (temp > 0)
     {
-        return false;
+        temp /= 10;
+        digitos++;
     }
+    return digitos == 10;
+}
 
+bool validarCadena(const char* cadena, size_t tamanio)
+{
+    if (cadena == nullptr || cadena[0] == '\0') return false;
+    if (strlen(cadena) >= tamanio) return false;
     return true;
 }
 
-bool validarCadena(std::string& cadena, size_t tamanio)
+bool validarCorreo(const char* correo)
 {
-    if (cadena.empty())
-    {
-        return false;
-    }
+    if (correo == nullptr) return false;
 
-    if (cadena.size() >= tamanio)
-    {
-        return false;
-    }
+    const char* arroba = strchr(correo, '@');
+    const char* punto = strrchr(correo, '.');
 
-    return true;
-}
-
-bool validarCorreo(std::string& correo)
-{
-    size_t arroba = correo.find('@'); // Busca la primera aparición de '@'.
-    size_t punto = correo.rfind('.'); // Busca la última aparición de '.'.
-
-    if (arroba == std::string::npos) // npos ("no position") es como un null para size_t. Es el valor max de size_t.
-    {
-        return false;
-    }
-
-    if (punto == std::string::npos)
-    {
-        return false;
-    }
-
-    if (arroba >= punto)
-    {
-        return false;
-    }
-
-    if (correo.size() >= 50)
-    {
-        return false;
-    }
+    if (!arroba || !punto) return false;
+    if (arroba >= punto) return false;
+    if (strlen(correo) >= 50) return false;
 
     return true;
 }
 
 Persona::Persona()
-    :
-     _DNI{},
-     _nombre{ "" },
-     _apellido{ "" },
-     _fechaNacimiento{},
-     _telefono{},
-     _estado{ true },
-     _correo{ "" }
-{}
+    : _DNI{},
+      _fechaNacimiento{},
+      _telefono{},
+      _estado{true}
+{
+    _nombre[0] = '\0';
+    _apellido[0] = '\0';
+    _correo[0] = '\0';
+}
 
 Persona::Persona(int DNI,
-                 std::string& nombre,
-                 std::string& apellido,
+                 const char* nombre,
+                 const char* apellido,
                  Fecha& fechaNacimiento,
                  int telefono,
                  bool estado,
-                 std::string& correo)
-            :
-                _fechaNacimiento{ fechaNacimiento },
-                _estado{ estado }
+                 const char* correo)
+    : _fechaNacimiento{fechaNacimiento},
+      _estado{estado}
 {
     setDni(DNI);
     setNombre(nombre);
@@ -98,43 +81,29 @@ Persona::Persona(int DNI,
 
 void Persona::setDni(int DNI)
 {
-    if (validarDni(DNI))
-    {
-        _DNI = DNI;
-    }
+    if (validarDni(DNI)) _DNI = DNI;
 }
 
-void Persona::setNombre(std::string& nombre)
+void Persona::setNombre(const char* nombre)
 {
-    if (validarCadena(nombre, 30))
-    {
-        _nombre = nombre;
-    }
+    if (validarCadena(nombre, sizeof(_nombre))) strncpy(_nombre, nombre, sizeof(_nombre) - 1), _nombre[sizeof(_nombre) - 1] = '\0';
 }
 
-void Persona::setApellido(std::string& apellido)
+void Persona::setApellido(const char* apellido)
 {
-    if (validarCadena(apellido, 30))
-    {
-        _apellido = apellido;
-    }
+    if (validarCadena(apellido, sizeof(_apellido))) strncpy(_apellido, apellido, sizeof(_apellido) - 1), _apellido[sizeof(_apellido) - 1] = '\0';
 }
 
 void Persona::setFechaNacimiento(int dia, int mes, int anio)
 {
     Fecha fecha;
-
     fecha.setFecha(dia, mes, anio);
-
     _fechaNacimiento = fecha;
 }
 
 void Persona::setTelefono(int telefono)
 {
-    if (validarTelefono(telefono))
-    {
-        _telefono = telefono;
-    }
+    if (validarTelefono(telefono)) _telefono = telefono;
 }
 
 void Persona::setEstado(bool estado)
@@ -142,12 +111,10 @@ void Persona::setEstado(bool estado)
     _estado = estado;
 }
 
-void Persona::setCorreo(std::string& correo)
+void Persona::setCorreo(const char* correo)
 {
-    if (validarCorreo(correo))
-    {
-        _correo = correo;
-    }
+    if (validarCorreo(correo)) strncpy(_correo, correo, sizeof(_correo) - 1), _correo[sizeof(_correo) - 1] = '\0';
 }
+
 
 

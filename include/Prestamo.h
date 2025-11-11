@@ -11,7 +11,7 @@ class Prestamo
 {
 private:
     int _prestamoID;
-    std::vector<Libro> _librosPrestados;
+    Libro _libroPrestado;
     Socio _socio;
     Fecha _fechaPrestamo;
     Fecha _fechaDevolucion;
@@ -20,7 +20,8 @@ private:
     static int prestamoID;
 
 public:
-    Prestamo(Socio socio, Fecha fechaPrestamo, Fecha fechaDevolucion);
+    Prestamo();
+    Prestamo(Libro libro, Socio socio, Fecha fechaPrestamo, Fecha fechaDevolucion);
 
     int getPrestamoID() const { return _prestamoID; }
     Fecha getFechaPrestamo() const { return _fechaPrestamo; }
@@ -29,8 +30,8 @@ public:
     void setFechaDevolucion(Fecha fechaDevolucion);
     void setEstado(bool estado);
 
-    void agregarLibro(Libro libro);
-    void quitarLibro(std::string ISBN);
+    static int getID() { return prestamoID; }
+    static void setID(int ID) { prestamoID = ID; }
 
     friend std::ostream& operator<<(std::ostream& os, const Prestamo& prestamo);
     bool operator==(const Prestamo& prestamo) const { return _prestamoID == prestamo.getPrestamoID(); }

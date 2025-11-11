@@ -1,39 +1,40 @@
 #ifndef PERSONA_H
 #define PERSONA_H
 
-#include <string>
 #include "Fecha.h"
+#include <cstring>
 
 class Persona
 {
 private:
     int _DNI;
-    std::string _nombre;
-    std::string _apellido;
+    char _nombre[30];
+    char _apellido[30];
     Fecha _fechaNacimiento;
     int _telefono;
     bool _estado;
-    std::string _correo;
+    char _correo[50];
 
 public:
-    Persona(); // constructor default.
-    Persona(int DNI, std::string& nombre, std::string& apellido, Fecha& fechaNacimiento, int telefono, bool estado, std::string& correo);
+    Persona();
+    Persona(int DNI, const char* nombre, const char* apellido, Fecha& fechaNacimiento, int telefono, bool estado, const char* correo);
 
     int getDNI() const { return _DNI; }
-    std::string getNombre() const { return _nombre; }
-    std::string getApellido() const { return _apellido; }
+    const char* getNombre() const { return _nombre; }
+    const char* getApellido() const { return _apellido; }
     Fecha getFechaNacimiento() const { return _fechaNacimiento; }
     int getTelefono() const { return _telefono; }
     bool getEstado() const { return _estado; }
-    std::string getCorreo() const { return _correo; }
+    const char* getCorreo() const { return _correo; }
 
     void setDni(int DNI);
-    void setNombre(std::string& nombre);
-    void setApellido(std::string& apellido);
+    void setNombre(const char* nombre);
+    void setApellido(const char* apellido);
     void setFechaNacimiento(int dia, int mes, int anio);
     void setTelefono(int telefono);
     void setEstado(bool estado);
-    void setCorreo(std::string& correo);
+    void setCorreo(const char* correo);
 };
 
-#endif // PERSONA_H
+#endif
+

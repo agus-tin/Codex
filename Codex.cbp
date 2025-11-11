@@ -36,7 +36,10 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/Admin.h" />
-		<Unit filename="include/Autor.h" />
+		<Unit filename="include/ArchivoAdmins.h" />
+		<Unit filename="include/ArchivoLibros.h" />
+		<Unit filename="include/ArchivoPrestamos.h" />
+		<Unit filename="include/ArchivoSocios.h" />
 		<Unit filename="include/Biblioteca.h" />
 		<Unit filename="include/Fecha.h" />
 		<Unit filename="include/Genero.h" />
@@ -47,7 +50,10 @@
 		<Unit filename="include/Socio.h" />
 		<Unit filename="include/rlutil.h" />
 		<Unit filename="src/Admin.cpp" />
-		<Unit filename="src/Autor.cpp" />
+		<Unit filename="src/ArchivoAdmins.cpp" />
+		<Unit filename="src/ArchivoLibros.cpp" />
+		<Unit filename="src/ArchivoPrestamos.cpp" />
+		<Unit filename="src/ArchivoSocios.cpp" />
 		<Unit filename="src/Biblioteca.cpp" />
 		<Unit filename="src/Fecha.cpp" />
 		<Unit filename="src/Libro.cpp" />

@@ -1,8 +1,8 @@
 #include "Admin.h"
 
-std::string rolString(Rol rol)
+const char* rolString(Rol rol)
 {
-    switch(rol)
+    switch (rol)
     {
         case Rol::Auxiliar:       return "Auxiliar";
         case Rol::Bibliotecario:  return "Bibliotecario";
@@ -14,23 +14,33 @@ std::string rolString(Rol rol)
 int Admin::adminID = 1;
 
 Admin::Admin()
-    : _usuario{ "usuario" }, _contrasenia{ "contrasenia" }, _rol{}
-{}
-
-Admin::Admin(std::string usuario, std::string contrasenia, Rol rol)
-    : _usuario{ usuario }, _contrasenia{ contrasenia }, _rol{ rol }
 {
+    std::strcpy(_usuario, "usuario");
+    std::strcpy(_contrasenia, "contrasenia");
+    _rol = Rol::Auxiliar;
     _adminID = adminID++;
 }
 
-void Admin::setUsuario(std::string usuario)
+Admin::Admin(const char* usuario, const char* contrasenia, Rol rol)
 {
-    _usuario = usuario;
+    std::strncpy(_usuario, usuario, sizeof(_usuario) - 1);
+    _usuario[sizeof(_usuario) - 1] = '\0';
+    std::strncpy(_contrasenia, contrasenia, sizeof(_contrasenia) - 1);
+    _contrasenia[sizeof(_contrasenia) - 1] = '\0';
+    _rol = rol;
+    _adminID = adminID++;
 }
 
-void Admin::setContrasenia(std::string contrasenia)
+void Admin::setUsuario(const char* usuario)
 {
-    _contrasenia = contrasenia;
+    std::strncpy(_usuario, usuario, sizeof(_usuario) - 1);
+    _usuario[sizeof(_usuario) - 1] = '\0';
+}
+
+void Admin::setContrasenia(const char* contrasenia)
+{
+    std::strncpy(_contrasenia, contrasenia, sizeof(_contrasenia) - 1);
+    _contrasenia[sizeof(_contrasenia) - 1] = '\0';
 }
 
 void Admin::setRol(Rol rol)
@@ -42,8 +52,9 @@ std::ostream& operator<<(std::ostream& os, const Admin& admin)
 {
     os << "AdminID: " << admin.getAdminID() << '\n';
     os << "Nombre: " << admin.getNombre() << " " << admin.getApellido() << '\n';
-    Rol rol = admin.getRol();
-    os << "Rol: " << rolString(rol);
-
+    os << "Usuario: " << admin.getUsuario() << '\n';
+    os << "Rol: " << rolString(admin.getRol());
     return os;
 }
+
+

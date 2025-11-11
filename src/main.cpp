@@ -14,16 +14,32 @@
 
 using namespace std;
 
+int seleccionarOpcion(int& opcion);
+void menuLibros(Biblioteca biblioteca);
+
 int main()
 {
-    // InicializaciÃ³n
+    // Inicialización
     Biblioteca biblioteca;
+
+    // Esto es código de prueba.
+    // Lo usé para agregar libros y el usuario "user1" de forma manual, pero obviamente tenemos que empezar a hacerlo con la interfaz.
+
+    //Admin admin1("user1", "pass1", Rol::SysAdmin);
+    //Libro libro1("9781138627000", "Real-Time Rendering", "Tomas Akenine-Moller, et al", "CRC Press", Fecha(6, 8, 2018), 1, Genero::Informatica, true);
+    //Libro libro2("9780201835953", "Mythical Man-Month", "Frederick Brooks Jr.", "Addison-Wesley Professional", Fecha(2, 8, 1995), 0, Genero::Informatica, false);
+
+    //biblioteca.admins.agregarAdmin(admin1);
+    //biblioteca.libros.agregarLibro(libro1);
+    //biblioteca.libros.agregarLibro(libro2);
 
     // Menu inicial
 
     while (true)
     {
-        int opcionMenuInicial = 0;
+        system("cls");
+
+        int opcion = 0;
 
         cout << "Bienvenido al Sistema Integrado de Gestion Bibliotecaria \"Codex\"" << "\n\n";
 
@@ -32,28 +48,16 @@ int main()
         cout << "1. Iniciar sesion." << '\n';
         cout << "2. Salir." << "\n\n";
 
-        if (!(cin >> opcionMenuInicial))
-        {
-            cin.clear(); // Limpia el estado de input stream.
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Resetea el input stream.
-            system("cls");
+        opcion = seleccionarOpcion(opcion);
 
-            cout << "Opcion invalida. Por favor ingrese solo el numero de su opcion." << "\n\n";
-
-            system("pause");
-            system("cls");
-            continue;
-        }
-
-
-        if (opcionMenuInicial == 1)
+        if (opcion == 1)
         {
             system("cls");
             break;
         }
-        else if (opcionMenuInicial == 2)
+        else if (opcion == 2)
         {
-            exit(0);
+            return 0;
         }
         else
         {
@@ -66,63 +70,144 @@ int main()
         }
     }
 
-    // Inicio de sesion
+    // Inicio de sesión
 
     /// NOTAS:
-    /// -Un ADMIN tiene un "bool estado", hay que chequear si esta habilitado o no al iniciar sesion.
+    /// -Comentar el ingreso a sesión de esta manera lo deshabilita. Está bueno para testear.
+    /// -Si el usuario no sabe sus datos queda atrapado en un loop infinito de validación. Posiblemente indeseado.
 
-    while (true)
+    /*while (true)
     {
-        std::string usuario;
-        std::string contrasenia;
+        char usuario[30];
+        char contrasenia[30];
 
-        cout << "Ingrese sus datos:" << "\n\n";
+        std::cout << "Ingrese sus datos: " << "\n\n";
 
-        cout << "Usuario: ";
-        cin >> usuario;
+        std::cout << "Usuario: ";
+        std::cin >> usuario;
+        std::cout << "Contrasenia: ";
+        std::cin >> contrasenia;
+        std::cout << '\n';
 
-        cout << "Contrasenia: ";
-        cin >> contrasenia;
-        cout << '\n';
-
-        Admin admin1("user1", "pass1", Rol::Bibliotecario);
-        biblioteca.agregarAdmin(admin1);
-
-        bool match = false;
-
-        for (size_t i = 0; i < biblioteca.admins.size(); ++i)
+        if (biblioteca.admins.validarUsuario(usuario, contrasenia))
         {
-            if (biblioteca.admins[i].getUsuario() == usuario && biblioteca.admins[i].getEstado())
-            {
-                match = true;
-                break;
-            }
+            break;
         }
 
         system("cls");
+        std::cout << "Usuario o contrasenia invalidos. Por favor intente de nuevo.\n\n";
+        system("pause");
+        system("cls");
+    }*/
 
-        if (!match)
+    //
+
+    while (true)
+    {
+        system("cls");
+
+        int opcion = 0;
+
+        std::cout << "Seleccione una opcion: " << "\n\n";
+
+        std::cout << "1. Administrar libros." << '\n';
+        std::cout << "2. Salir." << '\n';
+
+        opcion = seleccionarOpcion(opcion);
+
+        if (opcion == 1)
+        {
+            menuLibros(biblioteca);
+        }
+        else if (opcion == 2)
+        {
+            return 0;
+        }
+        else
         {
             system("cls");
 
-            cout << "Usuario o contrasenia invalidos. Por favor intente de nuevo." << "\n\n";
+            cout << "Opcion invalida. Por favor ingrese solo el numero de su opcion." << "\n\n";
 
             system("pause");
             system("cls");
         }
-        else
-        {
-            break;
-        }
     }
-    //menuPrincipal();
-    
 
     return 0;
 }
-/*void menuPrincipal(){
+
+int seleccionarOpcion(int& opcion)
+{
+    if (!(cin >> opcion))
+    {
+        cin.clear(); // Limpia el estado de input stream.
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Resetea el input stream.
+    }
+
+    return opcion;
+}
+
+void menuLibros(Biblioteca biblioteca)
+{
+    while (true)
+    {
+        system("cls");
+
+        int opcion = 0;
+        Libro libro;
+
+        std::cout << "--------LIBROS--------" << "\n\n";
+
+        std::cout << "Seleccione una opcion: " << "\n\n";
+
+        std::cout << "1. Agregar libro." << '\n';
+        std::cout << "2. Quitar libro." << '\n';
+        std::cout << "3. Listar libros." << '\n';
+        std::cout << "4. Volver al menu principal." << "\n\n";
+
+        opcion = seleccionarOpcion(opcion);
+
+        if (opcion == 1)
+        {
+            // Agregar libro.
+        }
+        else if (opcion == 2)
+        {
+            // Quitar libro.
+        }
+        else if (opcion == 3)
+        {
+            system("cls");
+
+            biblioteca.libros.listarLibros();
+
+            system("pause");
+            system("cls");
+        }
+        else if (opcion == 4)
+        {
+            break;
+        }
+        else
+        {
+            system("cls");
+
+            cout << "Opcion invalida. Por favor ingrese solo el numero de su opcion." << "\n\n";
+
+            system("pause");
+            system("cls");
+        }
+    }
+
+}
+
+/*void menuPrincipal()
+{
     int opcion;
-    do{
+
+    do
+    {
         system("cls");
 
         cout << "==============================\n";
@@ -137,19 +222,21 @@ int main()
         cout << "Opcion: ";
         cin >> opcion;
 
-        switch(opcion){
-        case 1: menuSocios (); break;
-        case 2: menuLibros(); break;
-        case 3: menuPrestamos(); break;
-        case 4: menuAdministradores(); break;
-        case 0:
-            cout << "Saliendo del sistema..."<< endl;
-            break;
-        default
-                cout <<"Opcion invalida " <<endl;
+        switch(opcion)
+        {
+            //case 1: menuSocios (); break;
+            case 2: menuLibros(); break;
+            //case 3: menuPrestamos(); break;
+            //case 4: menuAdministradores(); break;
+            case 0:
+                return 0;
+            default
+                cout << "Opcion invalida. " << endl;
                 break;
         }
+
         system("pause");
+
     } while (opcion!=0);
 
 }*/
@@ -158,7 +245,8 @@ int main()
     int opc;
     ArchivoSocios archSocios;
     Socio obj;
-    do{
+    do
+    {
         system("pause");
         cout <<"-----MENU SOCIOS-----"<<endl;
         cout <<"1. Agregar socio"<<endl;
@@ -247,7 +335,8 @@ int main()
     ArchivoLibros archLibros;
     Libro obj;
 
-    do {
+    do
+    {
         system("cls");
         cout << "-----MENU LIBROS-----"<<endl;
         cout << "1. Agregar libro"<<endl;
@@ -282,7 +371,8 @@ int main()
                 if (pos >= 0) {
                     obj = archLibros.leerRegistro(pos);
                     obj.mostrar();
-                } else {
+                } else
+                {
                     cout << "No se encontro ningun libro con ese ISBN."<<endl;
                 }
                 break;
@@ -294,7 +384,8 @@ int main()
                 cin >> isbn;
 
                 int pos = archLibros.buscarRegistroIsbn(isbn);
-                if (pos >= 0) {
+                if (pos >= 0)
+                {
                     obj = archLibros.leerRegistro(pos);
                     cout << "Libro actual:\n";
                     obj.mostrar();
@@ -303,7 +394,9 @@ int main()
                     obj.cargar();
                     archLibros.modificarRegistro(obj, pos);
                     cout << "Libro modificado correctamente."<<endl;
-                } else {
+                }
+                else
+                {
                     cout << "Libro no encontrado."<<endl;
                 }
                 break;
@@ -315,7 +408,8 @@ int main()
                 cin >> isbn;
 
                 int pos = archLibros.buscarRegistroIsbn(isbn);
-                if (pos >= 0) {
+                if (pos >= 0)
+                {
                     obj = archLibros.leerRegistro(pos);
                     obj.setEstado(false);
                     archLibros.modificarRegistro(obj, pos);
@@ -337,7 +431,8 @@ int main()
     ArchivoPrestamos archPrestamos;
     Prestamo obj;
 
-    do {
+    do
+    {
         system("cls");
         cout << "----- MENU PRESTAMOS -----"<<endl;
         cout << "1. Registrar prestamo"<<endl;
@@ -399,7 +494,8 @@ int main()
     ArchivoAdmin archAdmin;
     Admin obj;
 
-    do {
+    do
+    {
         system("cls");
         cout << "-----MENU ADMINISTRADORES-----"<<endl;
         cout << "1. Agregar administrador"<<endl;
@@ -439,7 +535,7 @@ int main()
                 break;
             }
 
-            
+
 
             case 4: {
                 char usuario[30];
