@@ -14,11 +14,11 @@ private:
     std::vector<Libro> libros;
 
 public:
-    ArchivoLibros(); // Al inicializar toda la data de "libros.dat" es cargada al vector din·mico "libros".
+    ArchivoLibros(); // Al inicializar toda la data de "libros.dat" es cargada al vector din√°mico "libros".
     ~ArchivoLibros(); // Al ser destruido el objeto se guarda toda la data a "libros.dat".
 
     void agregarLibro(Libro& libro);
-    void quitarLibro(const char* ISBN); // Es un char array [14].
+    bool quitarLibro(const char* ISBN); // Es un char array [14].
     void listarLibros();
 
     void cargar();

@@ -179,19 +179,20 @@ void menuLibros(Biblioteca& biblioteca)
 
         int opcion = 0;
 
-        std::cout << "--------LIBROS--------" << "\n\n";
+        cout << "--------LIBROS--------" << "\n\n";
 
-        std::cout << "Seleccione una opcion: " << "\n\n";
+        cout << "Seleccione una opcion: " << "\n\n";
 
-        std::cout << "1. Agregar libro." << '\n';
-        std::cout << "2. Quitar libro." << '\n';
-        std::cout << "3. Listar libros." << '\n';
-        std::cout << "4. Volver al menu principal." << "\n\n";
+        cout << "1. Agregar libro." << '\n';
+        cout << "2. Quitar libro." << '\n';
+        cout << "3. Listar libros." << '\n';
+        cout << "4. Volver al menu principal." << "\n\n";
 
         opcion = validarInput(opcion);
 
         if (opcion == 1)
         {
+            // ===== Agregar libro =====
             system("cls");
 
             char ISBN[14];

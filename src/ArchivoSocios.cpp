@@ -15,7 +15,7 @@ void ArchivoSocios::agregarSocio(Socio& socio)
     socios.push_back(socio);
 }
 
-void ArchivoSocios::quitarSocio(int socioID)
+/*void ArchivoSocios::quitarSocio(int socioID)
 {
     for (auto i = socios.begin(); i != socios.end(); ++i)
     {
@@ -25,6 +25,22 @@ void ArchivoSocios::quitarSocio(int socioID)
             return;
         }
     }
+}*/
+
+bool ArchivoSocios::quitarSocio(int socioID)
+{
+    for (auto i = socios.begin(); i != socios.end(); ++i)
+    {
+        if (i->getSocioID() == socioID)
+        {
+            socios.erase(i);
+            guardar();  // actualiza el archivo después de borrar
+            return true;  
+        }
+    }
+
+    // Si termina el for sin encontrar el ID
+    return false;
 }
 
 void ArchivoSocios::listarSocios()
