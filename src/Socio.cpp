@@ -10,6 +10,7 @@ int Socio::socioID = 1;
 
 std::ostream& operator<<(std::ostream& os, const Socio& socio)
 {
+    os << "  ID del socio: " << socio.getSocioID() << '\n';
     os << "  Nombre del socio: " << socio.getNombre() << " " << socio.getApellido() << '\n';
     os << "  DNI: " << socio.getDNI() << '\n';
     os << "  Telefono: " << socio.getTelefono() << '\n';
