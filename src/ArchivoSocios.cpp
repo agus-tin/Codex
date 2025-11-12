@@ -26,6 +26,20 @@ void ArchivoSocios::quitarSocio(int socioID)
         }
     }
 }
+void ArchivoSocios::listarSocios()
+{
+    if (socios.empty())
+    {
+        std::cout << "No hay socios registrados.\n";
+        return;
+    }
+
+    std::cout << "---- LISTADO DE SOCIOS ----\n\n";
+    for (const auto& socio : socios)
+    {
+        std::cout << socio << '\n';
+    }
+}
 
 void ArchivoSocios::cargar()
 {
