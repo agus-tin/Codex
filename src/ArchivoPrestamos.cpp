@@ -26,7 +26,20 @@ void ArchivoPrestamos::quitarPrestamo(int prestamoID)
         }
     }
 }
+void ArchivoPrestamos::listarPrestamos()
+{
+    if (prestamos.empty())
+    {
+        std::cout << "No hay préstamos registrados.\n";
+        return;
+    }
 
+    std::cout << "---- LISTADO DE PRÉSTAMOS ----\n\n";
+    for (const auto& prestamo : prestamos)
+    {
+        std::cout << prestamo << '\n';
+    }
+}
 void ArchivoPrestamos::cargar()
 {
     prestamos.clear();
