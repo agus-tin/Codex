@@ -311,7 +311,23 @@ seleccionarOpcion(opcion);
         else if (opcion == 2)
         {
             // ===== Quitar socio =====
-            
+            system("cls");
+           int id;
+             cout << "Ingrese numero de socio (ID): ";
+             cin >> id;
+
+           bool exito = biblioteca.socios.quitarSocio(id);
+
+           system("cls");
+         if (exito){
+        cout << "Socio eliminado correctamente.\n\n";
+        }
+        else
+        {
+        cout << "No existe ningun socio con ese ID.\n\n";
+        }
+
+        system("pause");
         }
         else if (opcion == 3)
         {
@@ -331,10 +347,10 @@ seleccionarOpcion(opcion);
             system("cls");
             cout << "Opcion invalida. Por favor ingrese solo el numero de su opcion.\n\n";
             system("pause");
-            system("cls");
         }
     }
 }
+
 */
 /* void menuLibros() {
     int opc;
