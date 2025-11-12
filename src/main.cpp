@@ -247,50 +247,93 @@ int opcion;
 
 /*void menuSocios(Biblioteca biblioteca) {
     int opcion = 0;
-        Socio socio;
-    while(true)
+
+    while (true)
     {
         system("pause");
-        cout <<"-----MENU SOCIOS-----\n";
-        cout <<"1. Agregar socio\n";
-        cout <<"2. Quitar socio\n";
-        cout <<"3. Listar socio\n";
-        cout <<"4. Volver al menu principal." << "\n\n";
+        cout << "-----MENU SOCIOS-----\n";
+        cout << "1. Agregar socio\n";
+        cout << "2. Quitar socio\n";
+        cout << "3. Listar socio\n";
+        cout << "4. Volver al menu principal.\n\n";
 
-        opcion = seleccionarOpcion(opcion);
+
+seleccionarOpcion(opcion);
 
         if (opcion == 1)
         {
-            // Agregar socio.
+            // ===== Agregar socio =====
+            system("cls");
+
+            Socio s;
+            int dni, tel;
+            int dia, mes, anio;
+            char nombre[30];
+            char apellido[30];
+            char correo[50];
+
+            cout << "DNI (8 digitos): ";
+            cin >> dni;
+
+            cout << "Nombre (max 29 chars): ";
+            cin >>nombre;
+
+            cout << "Apellido (max 29 chars): ";
+            cin >>  apellido;
+
+            cout << "Fecha de nacimiento (dia mes anio): ";
+            cin >> dia >> mes >> anio;
+
+            cout << "Telefono (10 digitos): ";
+            cin >> tel;
+
+            cout << "Correo (max 49 chars): ";
+            cin >> correo;
+
+            // Seteos
+
+            s.setDni(dni);
+            s.setNombre(nombre);
+            s.setApellido(apellido);
+            s.setFechaNacimiento(dia, mes, anio);
+            s.setTelefono(tel);
+            s.setCorreo(correo);
+            s.setEstado(true); // alta = activo
+
+            // Guardar en el archivo (a través de Biblioteca)
+            biblioteca.socios.agregarSocio(s);
+
+            system("cls");
+            cout << "Socio agregado correctamente.\n\n";
+            system("pause");
+            cout << "ID asignado: " << s.getSocioID() << "\n\n";
         }
         else if (opcion == 2)
         {
-            // Quitar socio.
+            // ===== Quitar socio =====
+            
         }
         else if (opcion == 3)
         {
+            // ===== Listar socios =====
             system("cls");
-
-           biblioteca.socios.listarSocios();
-
+            biblioteca.socios.listarSocios();
+            cout << "\n";
             system("pause");
             system("cls");
         }
         else if (opcion == 4)
         {
-            break;
+            break;  // volver al menú principal
         }
         else
         {
             system("cls");
-
-            cout << "Opcion invalida. Por favor ingrese solo el numero de su opcion." << "\n\n";
-
+            cout << "Opcion invalida. Por favor ingrese solo el numero de su opcion.\n\n";
             system("pause");
             system("cls");
         }
     }
-
 }
 */
 /* void menuLibros() {
