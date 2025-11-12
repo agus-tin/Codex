@@ -16,14 +16,17 @@ using namespace std;
 
 int seleccionarOpcion(int& opcion);
 void menuLibros(Biblioteca biblioteca);
+//void menuSocios(Biblioteca biblioteca);
+//void menuPrincipal(Biblioteca biblioteca);
+//void menuPrestamos(Biblioteca biblioteca);
 
 int main()
 {
-    // InicializaciÛn
+    // Inicializaci√≥n
     Biblioteca biblioteca;
 
-    // Esto es cÛdigo de prueba.
-    // Lo usÈ para agregar libros y el usuario "user1" de forma manual, pero obviamente tenemos que empezar a hacerlo con la interfaz.
+    // Esto es c√≥digo de prueba.
+    // Lo us√© para agregar libros y el usuario "user1" de forma manual, pero obviamente tenemos que empezar a hacerlo con la interfaz.
 
     //Admin admin1("user1", "pass1", Rol::SysAdmin);
     //Libro libro1("9781138627000", "Real-Time Rendering", "Tomas Akenine-Moller, et al", "CRC Press", Fecha(6, 8, 2018), 1, Genero::Informatica, true);
@@ -70,11 +73,11 @@ int main()
         }
     }
 
-    // Inicio de sesiÛn
+    // Inicio de sesi√≥n
 
     /// NOTAS:
-    /// -Comentar el ingreso a sesiÛn de esta manera lo deshabilita. Est· bueno para testear.
-    /// -Si el usuario no sabe sus datos queda atrapado en un loop infinito de validaciÛn. Posiblemente indeseado.
+    /// -Comentar el ingreso a sesi√≥n de esta manera lo deshabilita. Est√° bueno para testear.
+    /// -Si el usuario no sabe sus datos queda atrapado en un loop infinito de validaci√≥n. Posiblemente indeseado.
 
     /*while (true)
     {
@@ -202,9 +205,10 @@ void menuLibros(Biblioteca biblioteca)
 
 }
 
-/*void menuPrincipal()
+/*void menuPrincipal(Biblioteca biblioteca)
 {
-    int opcion;
+int opcion;
+
 
     do
     {
@@ -224,14 +228,14 @@ void menuLibros(Biblioteca biblioteca)
 
         switch(opcion)
         {
-            //case 1: menuSocios (); break;
-            case 2: menuLibros(); break;
-            //case 3: menuPrestamos(); break;
+            case 1: menuSocios (biblioteca); break;
+            case 2: menuLibros(biblioteca); break;
+            case 3: menuPrestamos(biblioteca); break;
             //case 4: menuAdministradores(); break;
             case 0:
-                return 0;
-            default
-                cout << "Opcion invalida. " << endl;
+                return ;
+            default:
+                cout << "Opcion invalida. \n";
                 break;
         }
 
@@ -241,93 +245,52 @@ void menuLibros(Biblioteca biblioteca)
 
 }*/
 
-/*void menuSocios() {
-    int opc;
-    ArchivoSocios archSocios;
-    Socio obj;
-    do
+/*void menuSocios(Biblioteca biblioteca) {
+    int opcion = 0;
+        Socio socio;
+    while(true)
     {
         system("pause");
-        cout <<"-----MENU SOCIOS-----"<<endl;
-        cout <<"1. Agregar socio"<<endl;
-        cout <<"2. Listas socio"<<endl;
-        cout <<"3. Buscar socio por numero de socio"<<endl;
-        cout <<"4. Modificar socio"<<endl:
-        cout <<"5. Borrar socio"<<endl;
-        cout << "0. Volver al menu principal\n";
-        cout << "-------------------"<<endl;
-        cout << "Opcion: ";
-        cin >> opc;
+        cout <<"-----MENU SOCIOS-----\n";
+        cout <<"1. Agregar socio\n";
+        cout <<"2. Quitar socio\n";
+        cout <<"3. Listar socio\n";
+        cout <<"4. Volver al menu principal." << "\n\n";
 
-        switch(opc) {
-            case 1: {
-                obj.cargar();
-                archSocios.grabarRegistro(obj);
-                cout << "Socio agregado correctamente."<<endl;
-                break;
-            }
+        opcion = seleccionarOpcion(opcion);
 
-            case 2: {
-                archSocios.listarArchivo();
-                break;
-            }
-
-            case 3: {
-                int nroSocio;
-                cout << "Ingrese numero de socio a buscar: ";
-                cin >> nroSocio;
-
-                int pos = archSocios.buscarRegistroNroSocio(nroSocio);
-                if (pos >= 0) {
-                    obj = archSocios.leerRegistro(pos);
-                    obj.mostrar();
-                } else {
-                    cout << "No se encontro ningun socio con ese numero."<<endl;
-                }
-                break;
-            }
-
-            case 4: {
-                int nroSocio;
-                cout << "Ingrese numero de socio a modificar: ";
-                cin >> nroSocio;
-
-                int pos = archSocios.buscarRegistroNroSocio(nroSocio);
-                if (pos >= 0) {
-                    obj = archSocios.leerRegistro(pos);
-                    cout << "Socio actual:"<<endl;
-                    obj.mostrar();
-
-                    cout << "\nIngrese los nuevos datos: "<<endl;
-                    obj.cargar();
-                    archSocios.modificarRegistro(obj, pos);
-                    cout << "Registro modificado correctamente."<<endl;
-                } else {
-                    cout << "Socio no encontrado."<<endl;
-                }
-                break;
-            }
-
-            case 5: { //
-                int nroSocio;
-                cout << "Ingrese numero de socio a eliminar: ";
-                cin >> nroSocio;
-
-                int pos = archSocios.buscarRegistroNroSocio(nroSocio);
-                if (pos >= 0) {
-                    obj = archSocios.leerRegistro(pos);
-                    obj.setEstado(false);
-                    archSocios.modificarRegistro(obj, pos);
-                    cout << "Socio dado de baja correctamente."<<endl;
-                } else {
-                    cout << "Socio no encontrado."<<endl;
-                }
-                break;
-            }
+        if (opcion == 1)
+        {
+            // Agregar socio.
         }
+        else if (opcion == 2)
+        {
+            // Quitar socio.
+        }
+        else if (opcion == 3)
+        {
+            system("cls");
 
-        system("pause");
-    } while(opc != 0);
+           biblioteca.socios.listarSocios();
+
+            system("pause");
+            system("cls");
+        }
+        else if (opcion == 4)
+        {
+            break;
+        }
+        else
+        {
+            system("cls");
+
+            cout << "Opcion invalida. Por favor ingrese solo el numero de su opcion." << "\n\n";
+
+            system("pause");
+            system("cls");
+        }
+    }
+
 }
 */
 /* void menuLibros() {
@@ -426,68 +389,56 @@ void menuLibros(Biblioteca biblioteca)
     } while(opc != 0);
 }
 */
-/*void menuPrestamos() {
-    int opc;
-    ArchivoPrestamos archPrestamos;
-    Prestamo obj;
-
-    do
+/*void menuPrestamos(Biblioteca biblioteca) {
+     int opcion = 0;
+        Socio socio;
+    while(true)
     {
-        system("cls");
-        cout << "----- MENU PRESTAMOS -----"<<endl;
-        cout << "1. Registrar prestamo"<<endl;
-        cout << "2. Registrar devolucion"<<endl;
-        cout << "3. Listar prestamos activos"<<endl;
-        cout << "0. Volver al menu principal"<<endl;
-        cout << "--------------------------"<<endl;
-        cout << "Opcion: ";
-        cin >> opc;
+        system("pause");
+        cout <<"-----MENU PRESTAMOS-----\n";
+        cout <<"1. Agregar prestamo\n";
+        cout <<"2. Quitar prestamo\n";
+        cout <<"3. Listar prestamo\n";
+        cout <<"4. Volver al menu principal." << "\n\n";
 
-        switch(opc) {
-            case 1: {
-                obj.cargar();
-                archPrestamos.grabarRegistro(obj);
-                cout << "Prestamo registrado correctamente."<<endl;
-                break;
-            }
+        opcion = seleccionarOpcion(opcion);
 
-            case 2: {
-                int idPrestamo;
-                cout << "Ingrese ID del prestamo a devolver: ";
-                cin >> idPrestamo;
-
-                int pos = archPrestamos.buscarRegistroID(idPrestamo);
-                if (pos >= 0) {
-                    obj = archPrestamos.leerRegistro(pos);
-                    if (obj.getDevuelto()) {
-                        cout << "El prestamo ya fue devuelto."<<endl;
-                    } else {
-                        obj.setDevuelto(true);
-                        archPrestamos.modificarRegistro(obj, pos);
-                        cout << "Devolucion registrada correctamente."<<endl;
-                    }
-                } else {
-                    cout << "Prestamo no encontrado."<<endl;
-                }
-                break;
-            }
-
-            case 3: {
-                int cant = archPrestamos.contarRegistros();
-                for (int i = 0; i < cant; i++) {
-                    obj = archPrestamos.leerRegistro(i);
-                    if (!obj.getDevuelto() && obj.getEstado()) {
-                        obj.mostrar();
-                        cout << "-----------------------------"<<endl;
-                    }
-                }
-                break;
-            }
+        if (opcion == 1)
+        {
+            // Agregar prestamo.
         }
+        else if (opcion == 2)
+        {
+            // Quitar prestamo.
+        }
+        else if (opcion == 3)
+        {
+            system("cls");
+
+           biblioteca.prestamos.listarPrestamos();
+
+        system("pause");
+            system("cls");
+        }
+        else if (opcion == 4)
+        {
+            break;
+        }
+        else
+        {
+            system("cls");
+
+            cout << "Opcion invalida. Por favor ingrese solo el numero de su opcion." << "\n\n";
+
+            system("pause");
+            system("cls");
+        }
+    }
+
 
         system("pause");
 
-    } while(opc != 0);
+
 }*/
 /*void menuAdministradores() {
     int opc;
