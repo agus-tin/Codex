@@ -17,7 +17,8 @@ public:
     ~ArchivoSocios();
 
     void agregarSocio(Socio& socio);
-    void quitarSocio(int socioID);
+    //void quitarSocio(int socioID);
+    bool quitarSocio(int socioID);
     void listarSocios();
 
     void cargar();
