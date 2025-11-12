@@ -11,9 +11,8 @@ class Prestamo
 {
 private:
     int _prestamoID;
-    Libro _libroPrestado;
-    Socio _socio;
-    Fecha _fechaPrestamo;
+    char _ISBN[14];
+    int _socioID;
     Fecha _fechaDevolucion;
     bool _estado = true;
 
@@ -21,10 +20,9 @@ private:
 
 public:
     Prestamo();
-    Prestamo(Libro libro, Socio socio, Fecha fechaPrestamo, Fecha fechaDevolucion);
+    Prestamo(const char* ISBN, int socioID, Fecha fechaDevolucion);
 
     int getPrestamoID() const { return _prestamoID; }
-    Fecha getFechaPrestamo() const { return _fechaPrestamo; }
     Fecha getFechaDevolucion() const { return _fechaDevolucion; }
 
     void setFechaDevolucion(Fecha fechaDevolucion);

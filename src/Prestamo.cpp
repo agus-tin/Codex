@@ -1,17 +1,18 @@
 #include "Prestamo.h"
-#include <algorithm> // for std::remove_if
 
-int Prestamo::prestamoID = 1;
+int Prestamo::prestamoID = 0;
 
 Prestamo::Prestamo()
 {
     _prestamoID = prestamoID++;
-    _estado = true;
 }
 
-Prestamo::Prestamo(Libro libro, Socio socio, Fecha fechaPrestamo, Fecha fechaDevolucion)
-    : _libroPrestado{ libro }, _socio{ socio }, _fechaPrestamo{ fechaPrestamo }, _fechaDevolucion{ fechaDevolucion }
+Prestamo::Prestamo(const char* ISBN, int socioID, Fecha fechaDevolucion)
+    : _socioID{ socioID }, _fechaDevolucion{ fechaDevolucion }
 {
+    std::strncpy(_ISBN, ISBN, sizeof(_ISBN) - 1);
+    _ISBN[sizeof(_ISBN) - 1] = '\0';
+
     _prestamoID = prestamoID++;
 }
 
@@ -27,12 +28,11 @@ void Prestamo::setEstado(bool estado)
 
 std::ostream& operator<<(std::ostream& os, const Prestamo& prestamo)
 {
-    os << "Prestamo ID: " << prestamo._prestamoID << '\n';
-    os << "Libro: " << prestamo._libroPrestado << '\n';
-    os << "Socio: " << prestamo._socio << '\n';
-    os << "Fecha Prestamo: " << prestamo._fechaPrestamo << '\n';
-    os << "Fecha Devolucion: " << prestamo._fechaDevolucion << '\n';
-    os << "Estado: " << (prestamo._estado ? "Activo" : "Finalizado") << '\n';
+    os << "  Prestamo ID: " << prestamo._prestamoID << '\n';
+    os << "  Libro ISBN: " << prestamo._ISBN << '\n';
+    os << "  Socio ID: " << prestamo._socioID << '\n';
+    os << "  Fecha Devolucion: " << prestamo._fechaDevolucion << '\n';
+    os << "  Estado: " << (prestamo._estado ? "Activo" : "Finalizado") << '\n';
 
     return os;
 }

@@ -4,7 +4,7 @@
 #include <cstdio>
 #include <cstring>
 
-bool validarDni(int DNI)
+bool validarDNI(int DNI)
 {
     int digitos = 0;
 
@@ -32,22 +32,39 @@ bool validarTelefono(int telefono)
 
 bool validarCadena(const char* cadena, size_t tamanio)
 {
-    if (cadena == nullptr || cadena[0] == '\0') return false;
-    if (strlen(cadena) >= tamanio) return false;
+    if (cadena == nullptr || cadena[0] == '\0')
+    {
+        return false;
+    }
+    if (strlen(cadena) >= tamanio)
+    {
+        return false;
+    }
     return true;
 }
 
 bool validarCorreo(const char* correo)
 {
-    if (correo == nullptr) return false;
+    if (correo == nullptr)
+    {
+        return false;
+    }
 
     const char* arroba = strchr(correo, '@');
     const char* punto = strrchr(correo, '.');
 
-    if (!arroba || !punto) return false;
-    if (arroba >= punto) return false;
-    if (strlen(correo) >= 50) return false;
-
+    if (!arroba || !punto)
+    {
+        return false;
+    }
+    if (arroba >= punto)
+    {
+        return false;
+    }
+    if (strlen(correo) >= 50)
+    {
+        return false;
+    }
     return true;
 }
 
@@ -81,7 +98,7 @@ Persona::Persona(int DNI,
 
 void Persona::setDni(int DNI)
 {
-    if (validarDni(DNI)) _DNI = DNI;
+    if (validarDNI(DNI)) _DNI = DNI;
 }
 
 void Persona::setNombre(const char* nombre)

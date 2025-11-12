@@ -36,5 +36,10 @@ public:
     void setCorreo(const char* correo);
 };
 
+bool validarDNI(int DNI);
+bool validarTelefono(int telefono);
+bool validarCadena(const char* cadena, size_t tamanio);
+bool validarCorreo(const char* correo);
+
 #endif
 

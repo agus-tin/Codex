@@ -1,5 +1,16 @@
 #include "ArchivoAdmins.h"
 
+bool ArchivoAdmins::validarPrivilegios(const char* usuario)
+{
+    for (auto& admin : admins)
+    {
+        if (std::strcmp(admin.getUsuario(), usuario) == 0 && admin.getRol() == Rol::SysAdmin)
+        {
+            return true;
+        }
+    }
+}
+
 ArchivoAdmins::ArchivoAdmins()
 {
     cargar();
@@ -12,7 +23,7 @@ ArchivoAdmins::~ArchivoAdmins()
 
 bool ArchivoAdmins::validarUsuario(const char* usuario, const char* contrasenia)
 {
-    for (const auto& admin : admins)
+    for (auto& admin : admins)
     {
         if (std::strcmp(admin.getUsuario(), usuario) == 0 && // strcmp() compara C-strings y retorna 0 si son iguales
             std::strcmp(admin.getContrasenia(), contrasenia) == 0 &&
@@ -40,6 +51,23 @@ void ArchivoAdmins::quitarAdmin(int adminID)
         }
     }
 }
+
+void ArchivoAdmins::listarAdmins()
+{
+    std::cout << "--- LISTADO DE USUARIOS ---" << "\n\n";
+
+    if (admins.empty())
+    {
+        std::cout << "No hay usuarios registrados." << "\n\n";
+        return;
+    }
+
+    for (auto& admin : admins)
+    {
+        std::cout << admin << '\n';
+    }
+}
+
 // cargar() es una función que usamos en el constructor en las clases archivo dentro
 // de Biblioteca (que a su vez se crea al principio del programa, vean línea 20 de main).
 // Su propósito es cargar los datos en los archivos ".dat" a los vectores dinámicos.

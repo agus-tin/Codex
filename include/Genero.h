@@ -6,7 +6,6 @@
 enum class Genero
 {
     Misc,
-    Ficcion,
     NoFiccion,
     CienciaFiccion,
     Fantasia,
@@ -24,7 +23,6 @@ inline std::ostream& operator<<(std::ostream& os, const Genero& genero)
     switch (genero)
     {
         case Genero::Misc: os << "Miscelaneo"; break;
-        case Genero::Ficcion: os << "Ficcion"; break;
         case Genero::NoFiccion: os << "No ficcion"; break;
         case Genero::CienciaFiccion: os << "Ciencia ficcion"; break;
         case Genero::Fantasia: os << "Fantasia"; break;

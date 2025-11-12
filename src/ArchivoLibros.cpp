@@ -29,9 +29,11 @@ void ArchivoLibros::quitarLibro(const char* ISBN)
 
 void ArchivoLibros::listarLibros()
 {
+    std::cout << "---- LISTADO DE LIBROS ----\n\n";
+
     if (libros.empty())
     {
-        std::cout << "No hay libros registrados.\n";
+        std::cout << "No hay libros registrados." << "\n\n";
         return;
     }
 
@@ -58,8 +60,6 @@ void ArchivoLibros::cargar()
     {
         libros.push_back(libro);
     }
-
-    archivo.close();
 }
 
 void ArchivoLibros::guardar()
@@ -73,10 +73,8 @@ void ArchivoLibros::guardar()
         return;
     }
 
-    for (const auto& libro : libros)
+    for (auto& libro : libros)
     {
         archivo.write(reinterpret_cast<const char*>(&libro), sizeof(Libro));
     }
-
-    archivo.close();
 }

@@ -14,11 +14,11 @@
 
 using namespace std;
 
-int seleccionarOpcion(int& opcion);
-void menuLibros(Biblioteca biblioteca);
-//void menuSocios(Biblioteca biblioteca);
-//void menuPrincipal(Biblioteca biblioteca);
-//void menuPrestamos(Biblioteca biblioteca);
+void menuLibros(Biblioteca& biblioteca);
+void menuPrestamos(Biblioteca& biblioteca);
+void menuAdmins(Biblioteca& biblioteca);
+void menuSocios(Biblioteca& biblioteca);
+int validarInput(int input);
 
 int main()
 {
@@ -26,13 +26,12 @@ int main()
     Biblioteca biblioteca;
 
     // Esto es código de prueba.
-    // Lo usé para agregar libros y el usuario "user1" de forma manual, pero obviamente tenemos que empezar a hacerlo con la interfaz.
 
-    //Admin admin1("user1", "pass1", Rol::SysAdmin);
-    //Libro libro1("9781138627000", "Real-Time Rendering", "Tomas Akenine-Moller, et al", "CRC Press", Fecha(6, 8, 2018), 1, Genero::Informatica, true);
-    //Libro libro2("9780201835953", "Mythical Man-Month", "Frederick Brooks Jr.", "Addison-Wesley Professional", Fecha(2, 8, 1995), 0, Genero::Informatica, false);
+    Admin admin1(11111111, "nombre", "apellido", Fecha(1,1,1900), 1111111111, true, "a@a.com", "123", "456789", Rol::SysAdmin);
+    //Libro libro1("9781138627000", "Real-Time Rendering", "Tomas Akenine-Moller, et al", "CRC Press", Fecha(6, 8, 2018), 1, Genero::Informatica);
+    //Libro libro2("9780201835953", "Mythical Man-Month", "Frederick Brooks Jr.", "Addison-Wesley Professional", Fecha(2, 8, 1995), 2, Genero::Informatica);
 
-    //biblioteca.admins.agregarAdmin(admin1);
+    biblioteca.admins.agregarAdmin(admin1);
     //biblioteca.libros.agregarLibro(libro1);
     //biblioteca.libros.agregarLibro(libro2);
 
@@ -44,14 +43,14 @@ int main()
 
         int opcion = 0;
 
-        cout << "Bienvenido al Sistema Integrado de Gestion Bibliotecaria \"Codex\"" << "\n\n";
+        cout << "Bienvenido al Sistema Integrado de Gestion Bibliotecaria \"Codex\"." << "\n\n";
 
         cout << "Seleccione una opcion de las siguientes: " << "\n\n";
 
         cout << "1. Iniciar sesion." << '\n';
         cout << "2. Salir." << "\n\n";
 
-        opcion = seleccionarOpcion(opcion);
+        opcion = validarInput(opcion);
 
         if (opcion == 1)
         {
@@ -76,14 +75,13 @@ int main()
     // Inicio de sesión
 
     /// NOTAS:
-    /// -Comentar el ingreso a sesión de esta manera lo deshabilita. Está bueno para testear.
-    /// -Si el usuario no sabe sus datos queda atrapado en un loop infinito de validación. Posiblemente indeseado.
+    /// -Comentar el ingreso a sesión lo deshabilita. Está bueno para testear.
 
-    /*while (true)
+    char usuario[30];
+    char contrasenia[30];
+
+    while (true)
     {
-        char usuario[30];
-        char contrasenia[30];
-
         std::cout << "Ingrese sus datos: " << "\n\n";
 
         std::cout << "Usuario: ";
@@ -98,12 +96,12 @@ int main()
         }
 
         system("cls");
-        std::cout << "Usuario o contrasenia invalidos. Por favor intente de nuevo.\n\n";
+        std::cout << "Usuario o contrasenia invalidos. Por favor intente de nuevo." << "\n\n";
         system("pause");
         system("cls");
-    }*/
+    }
 
-    //
+    // Menu principal
 
     while (true)
     {
@@ -111,18 +109,50 @@ int main()
 
         int opcion = 0;
 
+        cout << "=======================" << '\n';
+        cout << "    MENU PRINCIPAL" << '\n';
+        cout << "=======================" << "\n\n";
+
         std::cout << "Seleccione una opcion: " << "\n\n";
 
         std::cout << "1. Administrar libros." << '\n';
-        std::cout << "2. Salir." << '\n';
+        std::cout << "2. Administrar prestamos." << '\n';
+        std::cout << "3. Administrar usuarios." << '\n';
+        std::cout << "4. Administrar socios." << '\n';
+        std::cout << "5. Salir." << '\n';
 
-        opcion = seleccionarOpcion(opcion);
+        opcion = validarInput(opcion);
 
         if (opcion == 1)
         {
             menuLibros(biblioteca);
         }
-        else if (opcion == 2)
+        else if (opcion ==2)
+        {
+            menuPrestamos(biblioteca);
+        }
+        else if (opcion == 3)
+        {
+            if (biblioteca.admins.validarPrivilegios(usuario))
+            {
+                menuAdmins(biblioteca);
+            }
+            else
+            {
+                system("cls");
+
+                cout << "No tienes los privilegios requeridos para acceder a este menu." << "\n\n";
+
+                system("pause");
+                system("cls");
+            }
+
+        }
+        else if (opcion == 4)
+        {
+            menuSocios(biblioteca);
+        }
+        else if (opcion == 5)
         {
             return 0;
         }
@@ -140,25 +170,14 @@ int main()
     return 0;
 }
 
-int seleccionarOpcion(int& opcion)
-{
-    if (!(cin >> opcion))
-    {
-        cin.clear(); // Limpia el estado de input stream.
-        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Resetea el input stream.
-    }
 
-    return opcion;
-}
-
-void menuLibros(Biblioteca biblioteca)
+void menuLibros(Biblioteca& biblioteca)
 {
     while (true)
     {
         system("cls");
 
         int opcion = 0;
-        Libro libro;
 
         std::cout << "--------LIBROS--------" << "\n\n";
 
@@ -169,15 +188,189 @@ void menuLibros(Biblioteca biblioteca)
         std::cout << "3. Listar libros." << '\n';
         std::cout << "4. Volver al menu principal." << "\n\n";
 
-        opcion = seleccionarOpcion(opcion);
+        opcion = validarInput(opcion);
 
         if (opcion == 1)
         {
-            // Agregar libro.
+            system("cls");
+
+            char ISBN[14];
+            char titulo[50];
+            char autor[50];
+            char editorial[50];
+            Fecha fecha;
+            int cantidadEjemplares = 0;
+            Genero genero;
+
+            // ISBN
+            while (true)
+            {
+                std::cout << "ISBN (13 digitos): " << '\n';
+                std::cin >> ISBN;
+
+                if (validarISBN(ISBN))
+                {
+                    break;
+                }
+                else
+                {
+                    system("cls");
+                    std::cout << "Numero ISBN invalido, pruebe de nuevo.\n\n";
+                    system("pause");
+                    system("cls");
+                }
+            }
+
+            // Titulo
+            std::cout << "Titulo: " << '\n';
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cin.getline(titulo, 50);
+
+            // Autor
+            std::cout << "Autor: " << '\n';
+            std::cin.getline(autor, 50);
+
+            // Editorial
+            std::cout << "Editorial: " << '\n';
+            std::cin.getline(editorial, 50);
+
+            // Fecha
+            while (true)
+            {
+                int dia, mes, anio;
+
+                std::cout << "Fecha de publicacion:\n";
+
+                std::cout << "   Dia: ";
+                if (!(std::cin >> dia) || dia < 1 || dia > 31)
+                {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    system("cls");
+                    std::cout << "Dia invalido." << "\n\n";
+                    system("pause");
+                    system("cls");
+                    continue;
+                }
+
+                std::cout << "   Mes: ";
+                if (!(std::cin >> mes) || mes < 1 || mes > 12)
+                {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    system("cls");
+                    std::cout << "Mes invalido." << "\n\n";
+                    system("pause");
+                    system("cls");
+                    continue;
+                }
+
+                std::cout << "   Anio: ";
+                if (!(std::cin >> anio) || anio < 1500)
+                {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    system("cls");
+                    std::cout << "Anio invalido." << "\n\n";
+                    system("pause");
+                    system("cls");
+                    continue;
+                }
+
+                fecha.setFecha(dia, mes, anio);
+
+                break;
+            }
+
+            // Cantidad de ejemplares
+            while (true)
+            {
+                std::cout << "Cantidad de ejemplares: " << '\n';
+                if (!(std::cin >> cantidadEjemplares))
+                {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    system("cls");
+                    std::cout << "Cantidad invalida, pruebe de nuevo." << "\n\n";
+                    system("pause");
+                    system("cls");
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            // Genero
+            while (true)
+            {
+                std::cout << "Genero (elija una de las categorias): " << '\n';
+                std::cout << "   1. Miscelaneo." << '\n';
+                std::cout << "   2. No ficcion." << '\n';
+                std::cout << "   3. Ciencia ficcion." << '\n';
+                std::cout << "   4. Fantasia." << '\n';
+                std::cout << "   5. Historia." << '\n';
+                std::cout << "   6. Informatica." << '\n';
+                std::cout << "   7. Matematica." << '\n';
+                std::cout << "   8. Linguistica." << '\n';
+                std::cout << "   9. Arte." << '\n';
+                std::cout << "   10. Misterio." << '\n';
+                std::cout << "   11. Biografia." << '\n';
+
+                int opcionGenero;
+
+                if (!(std::cin >> opcionGenero) || opcionGenero < 1 || opcionGenero > 11)
+                {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    system("cls");
+                    std::cout << "Genero invalido, pruebe de nuevo." << "\n\n";
+                    system("pause");
+                    system("cls");
+                }
+                else
+                {
+                    genero = static_cast<Genero>(opcionGenero - 1);
+                    break;
+                }
+            }
+
+            Libro libro(ISBN, titulo, autor, editorial, fecha, cantidadEjemplares, genero);
+            biblioteca.libros.agregarLibro(libro);
+
         }
+
         else if (opcion == 2)
         {
-            // Quitar libro.
+            char ISBN[14];
+
+            while (true)
+            {
+                system("cls");
+
+                std::cout << "Escriba el numero ISBN del libro que quiera quitar: " << '\n';
+                std::cin >> ISBN;
+
+                if (validarISBN(ISBN))
+                {
+                    biblioteca.libros.quitarLibro(ISBN);
+
+                    system("cls");
+                    std::cout << "El libro, si es que estaba en la coleccion, ha sido removido." << "\n\n";
+                    system("pause");
+                    system("cls");
+
+                    break;
+                }
+                else
+                {
+                    system("cls");
+                    std::cout << "Numero ISBN invalido, pruebe de nuevo." << "\n\n";
+                    system("pause");
+                    system("cls");
+                }
+            }
+
         }
         else if (opcion == 3)
         {
@@ -202,222 +395,170 @@ void menuLibros(Biblioteca biblioteca)
             system("cls");
         }
     }
-
 }
 
-/*void menuPrincipal(Biblioteca biblioteca)
+void menuPrestamos(Biblioteca& biblioteca)
 {
-int opcion;
-
-
-    do
+    while (true)
     {
         system("cls");
 
-        cout << "==============================\n";
-        cout << "     SISTEMA DE BIBLIOTECA\n";
-        cout << "==============================\n";
-        cout << "1. Menu socios\n";
-        cout << "2. Menu libros\n";
-        cout << "3. Menu prestamos\n";
-        cout << "4. Menu administradores\n";
-        cout << "0. Salir\n";
-        cout << "==============================\n";
-        cout << "Opcion: ";
-        cin >> opcion;
+        int opcion = 0;
 
-        switch(opcion)
-        {
-            case 1: menuSocios (biblioteca); break;
-            case 2: menuLibros(biblioteca); break;
-            case 3: menuPrestamos(biblioteca); break;
-            //case 4: menuAdministradores(); break;
-            case 0:
-                return ;
-            default:
-                cout << "Opcion invalida. \n";
-                break;
-        }
+        std::cout << "-------PRESTAMOS-------" << "\n\n";
 
-        system("pause");
+        std::cout << "Seleccione una opcion: " << "\n\n";
 
-    } while (opcion!=0);
+        std::cout << "1. Agregar prestamo." << '\n';
+        std::cout << "2. Quitar prestamo." << '\n';
+        std::cout << "3. Listar prestamos." << '\n';
+        std::cout << "4. Volver al menu principal." << "\n\n";
 
-}*/
-
-/*void menuSocios(Biblioteca biblioteca) {
-    int opcion = 0;
-        Socio socio;
-    while(true)
-    {
-        system("pause");
-        cout <<"-----MENU SOCIOS-----\n";
-        cout <<"1. Agregar socio\n";
-        cout <<"2. Quitar socio\n";
-        cout <<"3. Listar socio\n";
-        cout <<"4. Volver al menu principal." << "\n\n";
-
-        opcion = seleccionarOpcion(opcion);
+        opcion = validarInput(opcion);
 
         if (opcion == 1)
         {
-            // Agregar socio.
-        }
-        else if (opcion == 2)
-        {
-            // Quitar socio.
-        }
-        else if (opcion == 3)
-        {
             system("cls");
 
-           biblioteca.socios.listarSocios();
+            char ISBN[14];
+            int socioID;
+            Fecha fechaDevolucion;
 
-            system("pause");
-            system("cls");
-        }
-        else if (opcion == 4)
-        {
-            break;
-        }
-        else
-        {
-            system("cls");
+            // ISBN
+            while (true)
+            {
+                std::cout << "ISBN del libro prestado (13 digitos): " << '\n';
+                std::cin >> ISBN;
 
-            cout << "Opcion invalida. Por favor ingrese solo el numero de su opcion." << "\n\n";
-
-            system("pause");
-            system("cls");
-        }
-    }
-
-}
-*/
-/* void menuLibros() {
-    int opc;
-    ArchivoLibros archLibros;
-    Libro obj;
-
-    do
-    {
-        system("cls");
-        cout << "-----MENU LIBROS-----"<<endl;
-        cout << "1. Agregar libro"<<endl;
-        cout << "2. Listar libros"<<endl;
-        cout << "3. Buscar libro por ISBN"<<endl;
-        cout << "4. Modificar libro"<<endl;
-        cout << "5. Eliminar libro "<<endl;
-        cout << "0. Volver al menu principal"<<endl;
-        cout << "---------------------"<<endl;
-        cout << "Opcion: ";
-        cin >> opc;
-
-        switch(opc) {
-            case 1: {
-                obj.cargar();
-                archLibros.grabarRegistro(obj);
-                cout << "Libro agregado correctamente."<<endl;
-                break;
-            }
-
-            case 2: {
-                archLibros.listarArchivo();
-                break;
-            }
-
-            case 3: {
-                int isbn;
-                cout << "Ingrese ISBN a buscar: ";
-                cin >> isbn;
-
-                int pos = archLibros.buscarRegistroIsbn(isbn);
-                if (pos >= 0) {
-                    obj = archLibros.leerRegistro(pos);
-                    obj.mostrar();
-                } else
+                if (validarISBN(ISBN))
                 {
-                    cout << "No se encontro ningun libro con ese ISBN."<<endl;
-                }
-                break;
-            }
-
-            case 4: {
-                int isbn;
-                cout << "Ingrese ISBN del libro a modificar: ";
-                cin >> isbn;
-
-                int pos = archLibros.buscarRegistroIsbn(isbn);
-                if (pos >= 0)
-                {
-                    obj = archLibros.leerRegistro(pos);
-                    cout << "Libro actual:\n";
-                    obj.mostrar();
-
-                    cout << "\nIngrese los nuevos datos:"<<endl;
-                    obj.cargar();
-                    archLibros.modificarRegistro(obj, pos);
-                    cout << "Libro modificado correctamente."<<endl;
+                    break;
                 }
                 else
                 {
-                    cout << "Libro no encontrado."<<endl;
+                    system("cls");
+                    std::cout << "Numero ISBN invalido, pruebe de nuevo.\n\n";
+                    system("pause");
+                    system("cls");
                 }
-                break;
             }
 
-            case 5: {
-                int isbn;
-                cout << "Ingrese ISBN del libro a eliminar: ";
-                cin >> isbn;
+            // socioID
 
-                int pos = archLibros.buscarRegistroIsbn(isbn);
-                if (pos >= 0)
+            while (true)
+            {
+                system("cls");
+
+                std::cout << "Escriba el ID del socio que haya hecho el prestamo: " << '\n';
+
+                socioID = validarInput(socioID);
+
+                if (socioID > 0)
                 {
-                    obj = archLibros.leerRegistro(pos);
-                    obj.setEstado(false);
-                    archLibros.modificarRegistro(obj, pos);
-                    cout << "Libro dado de baja correctamente."<<endl;
-                } else {
-                    cout << "Libro no encontrado."endl;
+                    break;
                 }
+                else
+                {
+                    system("cls");
+                    std::cout << "ID de socio invalido, pruebe de nuevo." << "\n\n";
+                    system("pause");
+                    system("cls");
+                }
+            }
+
+            // Fecha de devolución
+            while (true)
+            {
+                int dia, mes, anio;
+
+                std::cout << "Fecha de devolucion:" << '\n';
+
+                std::cout << "   Dia: ";
+                if (!(std::cin >> dia) || dia < 1 || dia > 31)
+                {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+                    system("cls");
+                    std::cout << "Dia invalido." << "\n\n";
+                    system("pause");
+                    system("cls");
+                    continue;
+                }
+
+                std::cout << "   Mes: ";
+                if (!(std::cin >> mes) || mes < 1 || mes > 12)
+                {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+                    system("cls");
+                    std::cout << "Mes invalido." << "\n\n";
+                    system("pause");
+                    system("cls");
+                    continue;
+                }
+
+                std::cout << "   Anio: ";
+                if (!(std::cin >> anio) || anio < 1900 || anio > 2025)
+                {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+                    system("cls");
+                    std::cout << "Anio invalido." << "\n\n";
+                    system("pause");
+                    system("cls");
+                    continue;
+                }
+
+                fechaDevolucion.setFecha(dia, mes, anio);
                 break;
             }
-        }
 
-        system("pause");
+            Prestamo prestamo(ISBN, socioID, fechaDevolucion);
 
-    } while(opc != 0);
-}
-*/
-/*void menuPrestamos(Biblioteca biblioteca) {
-     int opcion = 0;
-        Socio socio;
-    while(true)
-    {
-        system("pause");
-        cout <<"-----MENU PRESTAMOS-----\n";
-        cout <<"1. Agregar prestamo\n";
-        cout <<"2. Quitar prestamo\n";
-        cout <<"3. Listar prestamo\n";
-        cout <<"4. Volver al menu principal." << "\n\n";
-
-        opcion = seleccionarOpcion(opcion);
-
-        if (opcion == 1)
-        {
-            // Agregar prestamo.
+            biblioteca.prestamos.agregarPrestamo(prestamo);
         }
         else if (opcion == 2)
         {
-            // Quitar prestamo.
+            int prestamoID;
+
+            while (true)
+            {
+                system("cls");
+
+                std::cout << "Escriba el ID del prestamo que quiera quitar: " << '\n';
+
+                prestamoID = validarInput(prestamoID);
+
+                if (prestamoID > 0)
+                {
+                    biblioteca.prestamos.quitarPrestamo(prestamoID);
+
+                    system("cls");
+                    std::cout << "El prestamo, si es que estaba en el registro, ha sido removido." << "\n\n";
+                    system("pause");
+                    system("cls");
+
+                    break;
+                }
+                else
+                {
+                    system("cls");
+                    std::cout << "ID de prestamo invalido, pruebe de nuevo." << "\n\n";
+                    system("pause");
+                    system("cls");
+                }
+            }
         }
         else if (opcion == 3)
         {
             system("cls");
 
-           biblioteca.prestamos.listarPrestamos();
+            biblioteca.prestamos.listarPrestamos();
 
-        system("pause");
+            system("pause");
             system("cls");
         }
         else if (opcion == 4)
@@ -434,80 +575,607 @@ int opcion;
             system("cls");
         }
     }
+}
 
-
-        system("pause");
-
-
-}*/
-/*void menuAdministradores() {
-    int opc;
-    ArchivoAdmin archAdmin;
-    Admin obj;
-
-    do
+void menuAdmins(Biblioteca& biblioteca)
+{
+    while (true)
     {
         system("cls");
-        cout << "-----MENU ADMINISTRADORES-----"<<endl;
-        cout << "1. Agregar administrador"<<endl;
-        cout << "2. Listar administradores"<<endl;
-        cout << "3. Buscar administrador por usuario"<<endl;
-        cout << "4. Eliminar administrador "<<endl;
-        cout << "0. Volver al menu principal"<<endl;
-        cout << "------------------------------"<<endl;
-        cout << "Opcion: ";
-        cin >> opc;
 
-        switch(opc) {
-            case 1: {
-                obj.cargar();
-                archAdmin.grabarRegistro(obj);
-                cout << "Administrador agregado correctamente."<<endl;
-                break;
-            }
+        int opcion = 0;
 
-            case 2: {
-                archAdmin.listarArchivo();
-                break;
-            }
+        std::cout << "-------USUARIOS-------" << "\n\n";
 
-            case 3: {
-                char usuario[30];
-                cout << "Ingrese nombre de usuario: ";
-                cin >> usuario;
+        std::cout << "Seleccione una opcion: " << "\n\n";
 
-                int pos = archAdmin.buscarRegistroUsuario(usuario);
-                if (pos >= 0) {
-                    obj = archAdmin.leerRegistro(pos);
-                    obj.mostrar();
-                } else {
-                    cout << "Administrador no encontrado."<<endl;
+        std::cout << "1. Agregar usuario." << '\n';
+        std::cout << "2. Quitar usuario." << '\n';
+        std::cout << "3. Listar usuario." << '\n';
+        std::cout << "4. Volver al menu principal." << "\n\n";
+
+        opcion = validarInput(opcion);
+
+        if (opcion == 1)
+        {
+            system("cls");
+
+            int DNI;
+            char nombre[30];
+            char apellido[30];
+            Fecha fechaNacimiento;
+            int telefono;
+            bool estado = true;
+            char correo[50];
+            char usuario[30];
+            char contrasenia[30];
+            Rol rol; // 0 es Auxiliar, 1 es Bibliotecario y 2 es SysAdmin.
+
+
+            // DNI
+            while (true)
+            {
+                std::cout << "DNI (8 digitos): " << '\n';
+
+                if (!(std::cin >> DNI))
+                {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    system("cls");
+                    std::cout << "DNI invalido, pruebe de nuevo." << "\n\n";
+                    system("pause");
+                    system("cls");
+                    continue;
                 }
+
+                if (validarDNI(DNI))
+                {
+                    break;
+                }
+                else
+                {
+                    system("cls");
+                    std::cout << "DNI invalido, pruebe de nuevo." << "\n\n";
+                    system("pause");
+                    system("cls");
+                }
+            }
+
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+            // Nombre
+            while (true)
+            {
+                std::cout << "Nombre: " << '\n';
+                std::cin.getline(nombre, 30);
+
+                if (validarCadena(nombre, 30))
+                {
+                    break;
+                }
+                else
+                {
+                    system("cls");
+                    std::cout << "Nombre invalido, pruebe de nuevo." << "\n\n";
+                    system("pause");
+                    system("cls");
+                }
+            }
+
+            // Apellido
+            while (true)
+            {
+                std::cout << "Apellido: " << '\n';
+                std::cin.getline(apellido, 30);
+
+                if (validarCadena(apellido, 30))
+                {
+                    break;
+                }
+                else
+                {
+                    system("cls");
+                    std::cout << "Apellido invalido, pruebe de nuevo." << "\n\n";
+                    system("pause");
+                    system("cls");
+                }
+            }
+
+            // Fecha de nacimiento
+            while (true)
+            {
+                int dia, mes, anio;
+
+                std::cout << "Fecha de nacimiento:" << '\n';
+
+                std::cout << "   Dia: ";
+                if (!(std::cin >> dia) || dia < 1 || dia > 31)
+                {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    system("cls");
+
+                    std::cout << "Dia invalido." << "\n\n";
+                    system("pause");
+                    system("cls");
+                    continue;
+                }
+
+                std::cout << "   Mes: ";
+                if (!(std::cin >> mes) || mes < 1 || mes > 12)
+                {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+                    system("cls");
+                    std::cout << "Mes invalido." << "\n\n";
+                    system("pause");
+                    system("cls");
+                    continue;
+                }
+
+                std::cout << "   Anio: ";
+                if (!(std::cin >> anio) || anio < 1900 || anio > 2025)
+                {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    system("cls");
+
+                    std::cout << "Anio invalido." << "\n\n";
+                    system("pause");
+                    system("cls");
+                    continue;
+                }
+
+                fechaNacimiento.setFecha(dia, mes, anio);
                 break;
             }
 
+            // Telefono
+            while (true)
+            {
+                std::cout << "Telefono (10 digitos): " << '\n';
 
+                if (!(std::cin >> telefono))
+                {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    system("cls");
 
-            case 4: {
-                char usuario[30];
-                cout << "Ingrese nombre de usuario a eliminar: ";
-                cin >> usuario;
-
-                int pos = archAdmin.buscarRegistroUsuario(usuario);
-                if (pos >= 0) {
-                    obj = archAdmin.leerRegistro(pos);
-                    obj.setEstado(false);
-                    archAdmin.modificarRegistro(obj, pos);
-                    cout << "Administrador dado de baja correctamente."<<endl;
-                } else {
-                    cout << "Administrador no encontrado."<<endl;
+                    std::cout << "Telefono invalido, pruebe de nuevo." << '\n';
+                    system("pause");
+                    system("cls");
+                    continue;
                 }
-                break;
+
+                if (validarTelefono(telefono))
+                {
+                    break;
+                }
+                else
+                {
+                    system("cls");
+                    std::cout << "Telefono invalido, pruebe de nuevo." << "\n\n";
+                    system("pause");
+                    system("cls");
+                }
+            }
+
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+            // Correo
+            while (true)
+            {
+                std::cout << "Correo electronico: " << '\n';
+                std::cin.getline(correo, 50);
+
+                if (validarCorreo(correo))
+                {
+                    break;
+                }
+                else
+                {
+                    system("cls");
+                    std::cout << "Correo invalido, pruebe de nuevo." << "\n\n";
+                    system("pause");
+                    system("cls");
+                }
+            }
+
+            // Usuario
+            while (true)
+            {
+                std::cout << "Nombre de usuario: " << '\n';
+                std::cin.getline(usuario, 30);
+
+                if (strlen(usuario) >= 3)
+                {
+                    break;
+                }
+                else
+                {
+                    system("cls");
+                    std::cout << "Usuario invalido, pruebe de nuevo." << "\n\n";
+                    system("pause");
+                    system("cls");
+                }
+            }
+
+            // Contraseña
+            while (true)
+            {
+                std::cout << "Contrasenia: " << '\n';
+                std::cin.getline(contrasenia, 30);
+
+                if (strlen(contrasenia) >= 6)
+                {
+                    break;
+                }
+                else
+                {
+                    system("cls");
+                    std::cout << "Contrasenia invalida, pruebe de nuevo." << "\n\n";
+                    system("pause");
+                    system("cls");
+                }
+            }
+
+            // Rol
+            while (true)
+            {
+                std::cout << "Rol (elija una de las categorias): " << '\n';
+                std::cout << "   1. Auxiliar." << '\n';
+                std::cout << "   2. Bibliotecario." << '\n';
+                std::cout << "   3. SysAdmin." << '\n';
+
+                int opcionRol;
+
+                if (!(std::cin >> opcionRol) || opcionRol < 1 || opcionRol > 3)
+                {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+                    system("cls");
+                    std::cout << "Rol invalido, pruebe de nuevo." << "\n\n";
+                    system("pause");
+                    system("cls");
+                }
+                else
+                {
+                    rol = static_cast<Rol>(opcionRol - 1);
+                    break;
+                }
+            }
+
+            Admin admin(DNI, nombre, apellido, fechaNacimiento, telefono, estado, correo, usuario, contrasenia, rol);
+
+            biblioteca.admins.agregarAdmin(admin);
+        }
+        else if (opcion == 2)
+        {
+            int adminID;
+
+            while (true)
+            {
+                system("cls");
+
+                std::cout << "Escriba el ID del usuario que quiera quitar: " << '\n';
+
+                adminID = validarInput(adminID);
+
+                if (adminID > 0)
+                {
+                    biblioteca.admins.quitarAdmin(adminID);
+
+                    system("cls");
+                    std::cout << "El usuario, si es que estaba en el registro, ha sido removido." << "\n\n";
+                    system("pause");
+                    system("cls");
+
+                    break;
+                }
+                else
+                {
+                    system("cls");
+                    std::cout << "ID de usuario invalido, pruebe de nuevo." << "\n\n";
+                    system("pause");
+                    system("cls");
+                }
             }
         }
+        else if (opcion == 3)
+        {
+            system("cls");
 
-        system("pause");
+            biblioteca.admins.listarAdmins();
 
-    } while(opc != 0);
+            system("pause");
+            system("cls");
+        }
+        else if (opcion == 4)
+        {
+            break;
+        }
+        else
+        {
+            system("cls");
+
+            cout << "Opcion invalida. Por favor ingrese solo el numero de su opcion." << "\n\n";
+
+            system("pause");
+            system("cls");
+        }
+    }
 }
-*/
+
+void menuSocios(Biblioteca& biblioteca)
+{
+    while (true)
+    {
+        system("cls");
+
+        int opcion = 0;
+
+        std::cout << "--------SOCIOS--------" << "\n\n";
+
+        std::cout << "Seleccione una opcion: " << "\n\n";
+
+        std::cout << "1. Agregar socio." << '\n';
+        std::cout << "2. Quitar socio." << '\n';
+        std::cout << "3. Listar socios." << '\n';
+        std::cout << "4. Volver al menu principal." << "\n\n";
+
+        opcion = validarInput(opcion);
+
+        if (opcion == 1)
+        {
+            system("cls");
+
+            int DNI;
+            char nombre[30];
+            char apellido[30];
+            Fecha fechaNacimiento;
+            int telefono;
+            bool estado = true;
+            char correo[50];
+
+            // DNI
+            while (true)
+            {
+                std::cout << "DNI (8 digitos): " << '\n';
+
+                if (!(std::cin >> DNI))
+                {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    system("cls");
+                    std::cout << "DNI invalido, pruebe de nuevo." << "\n\n";
+                    system("pause");
+                    system("cls");
+                    continue;
+                }
+
+                if (validarDNI(DNI))
+                {
+                    break;
+                }
+                else
+                {
+                    system("cls");
+                    std::cout << "DNI invalido, pruebe de nuevo." << "\n\n";
+                    system("pause");
+                    system("cls");
+                }
+            }
+
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+            // Nombre
+            while (true)
+            {
+                std::cout << "Nombre: " << '\n';
+                std::cin.getline(nombre, 30);
+
+                if (validarCadena(nombre, 30))
+                {
+                    break;
+                }
+                else
+                {
+                    system("cls");
+                    std::cout << "Nombre invalido, pruebe de nuevo." << "\n\n";
+                    system("pause");
+                    system("cls");
+                }
+            }
+
+            // Apellido
+            while (true)
+            {
+                std::cout << "Apellido: " << '\n';
+                std::cin.getline(apellido, 30);
+
+                if (validarCadena(apellido, 30))
+                {
+                    break;
+                }
+                else
+                {
+                    system("cls");
+                    std::cout << "Apellido invalido, pruebe de nuevo." << "\n\n";
+                    system("pause");
+                    system("cls");
+                }
+            }
+
+            // Fecha de nacimiento
+            while (true)
+            {
+                int dia, mes, anio;
+
+                std::cout << "Fecha de nacimiento:" << '\n';
+
+                std::cout << "   Dia: ";
+                if (!(std::cin >> dia) || dia < 1 || dia > 31)
+                {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+                    system("cls");
+                    std::cout << "Dia invalido." << "\n\n";
+                    system("pause");
+                    system("cls");
+                    continue;
+                }
+
+                std::cout << "   Mes: ";
+                if (!(std::cin >> mes) || mes < 1 || mes > 12)
+                {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+                    system("cls");
+                    std::cout << "Mes invalido." << "\n\n";
+                    system("pause");
+                    system("cls");
+                    continue;
+                }
+
+                std::cout << "   Anio: ";
+                if (!(std::cin >> anio) || anio < 1900 || anio > 2025)
+                {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+                    system("cls");
+                    std::cout << "Anio invalido." << "\n\n";
+                    system("pause");
+                    system("cls");
+                    continue;
+                }
+
+                fechaNacimiento.setFecha(dia, mes, anio);
+                break;
+            }
+
+            // Telefono
+            while (true)
+            {
+                std::cout << "Telefono (10 digitos): " << '\n';
+
+                if (!(std::cin >> telefono))
+                {
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    system("cls");
+                    std::cout << "Telefono invalido, pruebe de nuevo." << '\n';
+                    system("pause");
+                    system("cls");
+                    continue;
+                }
+
+                if (validarTelefono(telefono))
+                {
+                    break;
+                }
+                else
+                {
+                    system("cls");
+                    std::cout << "Telefono invalido, pruebe de nuevo." << "\n\n";
+                    system("pause");
+                    system("cls");
+                }
+            }
+
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+            // Correo
+            while (true)
+            {
+                std::cout << "Correo electronico: " << '\n';
+                std::cin.getline(correo, 50);
+
+                if (validarCorreo(correo))
+                {
+                    break;
+                }
+                else
+                {
+                    system("cls");
+                    std::cout << "Correo invalido, pruebe de nuevo." << "\n\n";
+                    system("pause");
+                    system("cls");
+                }
+            }
+
+            Socio socio(DNI, nombre, apellido, fechaNacimiento, telefono, estado, correo);
+
+            biblioteca.socios.agregarSocio(socio);
+        }
+        else if (opcion == 2)
+        {
+            int socioID;
+
+            while (true)
+            {
+                system("cls");
+
+                std::cout << "Escriba el ID del socio que quiera quitar: " << '\n';
+
+                socioID = validarInput(socioID);
+
+                if (socioID > 0)
+                {
+                    biblioteca.socios.quitarSocio(socioID);
+
+                    system("cls");
+                    std::cout << "El socio, si es que estaba en el registro, ha sido removido." << "\n\n";
+                    system("pause");
+                    system("cls");
+
+                    break;
+                }
+                else
+                {
+                    system("cls");
+                    std::cout << "ID de socio invalido, pruebe de nuevo." << "\n\n";
+                    system("pause");
+                    system("cls");
+                }
+            }
+        }
+        else if (opcion == 3)
+        {
+            system("cls");
+
+            biblioteca.socios.listarSocios();
+
+            system("pause");
+            system("cls");
+        }
+        else if (opcion == 4)
+        {
+            break;
+        }
+        else
+        {
+            system("cls");
+
+            cout << "Opcion invalida. Por favor ingrese solo el numero de su opcion." << "\n\n";
+
+            system("pause");
+            system("cls");
+        }
+    }
+}
+
+int validarInput(int input)
+{
+    if (!(cin >> input))
+    {
+        cin.clear(); // Limpia el estado de input stream.
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Resetea el input stream.
+    }
+
+    return input;
+}

@@ -18,7 +18,7 @@ private:
 
 public:
     Admin();
-    Admin(const char* usuario, const char* contrasenia, Rol rol);
+    Admin(int DNI, const char* nombre, const char* apellido, Fecha fechaNacimiento, int telefono, bool estado, const char* correo, const char* usuario, const char* contrasenia, Rol rol);
 
     int getAdminID() const { return _adminID; }
     const char* getUsuario() const { return _usuario; }

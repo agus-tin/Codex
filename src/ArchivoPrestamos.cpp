@@ -28,13 +28,14 @@ void ArchivoPrestamos::quitarPrestamo(int prestamoID)
 }
 void ArchivoPrestamos::listarPrestamos()
 {
+    std::cout << "---- LISTADO DE PRESTAMOS ----" << "\n\n";
+
     if (prestamos.empty())
     {
-        std::cout << "No hay préstamos registrados.\n";
+        std::cout << "No hay prestamos registrados." << "\n\n";
         return;
     }
 
-    std::cout << "---- LISTADO DE PRÉSTAMOS ----\n\n";
     for (const auto& prestamo : prestamos)
     {
         std::cout << prestamo << '\n';

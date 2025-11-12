@@ -17,13 +17,17 @@ public:
     ~ArchivoAdmins();
 
     bool validarUsuario(const char* usuario, const char* contrasenia);
+    bool validarPrivilegios(const char* usuario);
+
     void agregarAdmin(Admin& admin);
     void quitarAdmin(int adminID);
+    void listarAdmins();
 
     void cargar();
     void guardar();
 
 };
+
 
 
 #endif // ARCHIVOADMINS_H_INCLUDED

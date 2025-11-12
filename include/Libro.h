@@ -7,6 +7,8 @@
 #include "Fecha.h"
 #include "Genero.h"
 
+class ArchivoLibros;
+
 class Libro
 {
 private:
@@ -20,8 +22,10 @@ private:
     bool _estado = true;
 
 public:
+    friend class ArchivoLibros;
+
     Libro();
-    Libro(const char* ISBN, const char* titulo, const char* autor, const char* editorial, Fecha fechaPublicacion, int cantidadEjemplares, Genero genero, bool estado);
+    Libro(const char* ISBN, const char* titulo, const char* autor, const char* editorial, Fecha fechaPublicacion, int cantidadEjemplares, Genero genero);
 
     const char* getISBN() const { return _ISBN; }
     const char* getTitulo() const { return _titulo; }
@@ -33,11 +37,8 @@ public:
     bool getEstado() const { return _estado; }
 
     void setISBN(const char* ISBN);
-    void setCantidadEjemplares(int cantidadEjemplares) { _cantidadEjemplares = cantidadEjemplares; }
+    void setCantidadEjemplares(int cantidadEjemplares);
     void setEstado(bool estado) { _estado = estado; }
-
-    bool guardar();
-    bool cargar(int pos);
 
     friend std::ostream& operator<<(std::ostream& os, const Libro& libro);
     bool operator==(const Libro& libro) const { return std::strcmp(_ISBN, libro.getISBN()) == 0; }

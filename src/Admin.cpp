@@ -11,23 +11,38 @@ const char* rolString(Rol rol)
     }
 }
 
-int Admin::adminID = 1;
+int Admin::adminID = 0;
 
 Admin::Admin()
+    : Persona()
 {
     std::strcpy(_usuario, "usuario");
     std::strcpy(_contrasenia, "contrasenia");
     _rol = Rol::Auxiliar;
+
     _adminID = adminID++;
 }
 
-Admin::Admin(const char* usuario, const char* contrasenia, Rol rol)
+Admin::Admin(int DNI,
+             const char* nombre,
+             const char* apellido,
+             Fecha fechaNacimiento,
+             int telefono,
+             bool estado,
+             const char* correo,
+             const char* usuario,
+             const char* contrasenia,
+             Rol rol)
+    : Persona(DNI, nombre, apellido, fechaNacimiento, telefono, estado, correo)
 {
     std::strncpy(_usuario, usuario, sizeof(_usuario) - 1);
     _usuario[sizeof(_usuario) - 1] = '\0';
+
     std::strncpy(_contrasenia, contrasenia, sizeof(_contrasenia) - 1);
     _contrasenia[sizeof(_contrasenia) - 1] = '\0';
+
     _rol = rol;
+
     _adminID = adminID++;
 }
 
@@ -50,10 +65,10 @@ void Admin::setRol(Rol rol)
 
 std::ostream& operator<<(std::ostream& os, const Admin& admin)
 {
-    os << "AdminID: " << admin.getAdminID() << '\n';
-    os << "Nombre: " << admin.getNombre() << " " << admin.getApellido() << '\n';
-    os << "Usuario: " << admin.getUsuario() << '\n';
-    os << "Rol: " << rolString(admin.getRol());
+    os << "  AdminID: " << admin.getAdminID() << '\n';
+    os << "  Nombre: " << admin.getNombre() << " " << admin.getApellido() << '\n';
+    os << "  Usuario: " << admin.getUsuario() << '\n';
+    os << "  Rol: " << rolString(admin.getRol()) << '\n';
     return os;
 }
 

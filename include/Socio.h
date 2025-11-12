@@ -12,6 +12,7 @@ private:
 
 public:
     Socio();
+    Socio(int DNI, const char* nombre, const char* apellido, Fecha& fechaNacimiento, int telefono, bool estado, const char* correo);
 
     int getSocioID() const { return _socioID; }
 
