@@ -18,6 +18,7 @@ public:
 
     void agregarPrestamo(Prestamo& prestamo);
     void quitarPrestamo(int prestamoID);
+    void listarPrestamos();
 
     void cargar();
     void guardar();
