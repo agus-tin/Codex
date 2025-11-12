@@ -160,24 +160,110 @@ void menuLibros(Biblioteca biblioteca)
         int opcion = 0;
         Libro libro;
 
-        std::cout << "--------LIBROS--------" << "\n\n";
+        cout << "--------LIBROS--------" << "\n\n";
 
-        std::cout << "Seleccione una opcion: " << "\n\n";
+        cout << "Seleccione una opcion: " << "\n\n";
 
-        std::cout << "1. Agregar libro." << '\n';
-        std::cout << "2. Quitar libro." << '\n';
-        std::cout << "3. Listar libros." << '\n';
-        std::cout << "4. Volver al menu principal." << "\n\n";
+        cout << "1. Agregar libro." << '\n';
+        cout << "2. Quitar libro." << '\n';
+        cout << "3. Listar libros." << '\n';
+        cout << "4. Volver al menu principal." << "\n\n";
 
         opcion = seleccionarOpcion(opcion);
 
         if (opcion == 1)
         {
-            // Agregar libro.
+            // ===== Agregar libro =====
+            system("cls");
+
+            char ISBN[14];
+            char titulo[50];
+            char autor[50];
+            char editorial[50];
+            int dia, mes, anio;
+            int ejemplares;
+            int generoSeleccionado;
+
+            cout << "Ingrese ISBN (13 digitos): ";
+            cin>>ISBN;
+
+            cout << "Titulo (max 49 chars): ";
+            cin.ignore();
+            cin.getline(titulo, 50);
+
+            cout << "Autor (max 49 chars): ";
+            cin.getline(autor, 50);
+
+            cout << "Editorial (max 49 chars): ";
+            cin.getline(editorial, 50);
+
+            cout << "Fecha de publicacion (dia mes anio): ";
+            cin >> dia >> mes >> anio;
+
+            cout << "Cantidad de ejemplares: ";
+            cin >> ejemplares;
+
+            cout << "\nSeleccione genero:\n";
+            cout << "1. Miscelaneo\n";
+            cout << "2. Ficcion\n";
+            cout << "3. No ficcion\n";
+            cout << "4. Ciencia ficcion\n";
+            cout << "5. Fantasia\n";
+            cout << "6. Historia\n";
+            cout << "7. Informatica\n";
+            cout << "8. Matematica\n";
+            cout << "9. Linguistica\n";
+            cout << "10. Arte\n";
+            cout << "11. Misterio\n";
+            cout << "12. Biografia\n";
+            cout << "Opcion: ";
+            cin >> generoSeleccionado;
+
+            Genero genero;
+            switch (generoSeleccionado)
+            {
+                case 1:  genero = Genero::Misc; break;
+                case 2:  genero = Genero::Ficcion; break;
+                case 3:  genero = Genero::NoFiccion; break;
+                case 4:  genero = Genero::CienciaFiccion; break;
+                case 5:  genero = Genero::Fantasia; break;
+                case 6:  genero = Genero::Historia; break;
+                case 7:  genero = Genero::Informatica; break;
+                case 8:  genero = Genero::Matematica; break;
+                case 9:  genero = Genero::Linguistica; break;
+                case 10: genero = Genero::Arte; break;
+                case 11: genero = Genero::Misterio; break;
+                case 12: genero = Genero::Biografia; break;
+                default: genero = Genero::Misc; break; // Valor por defecto
+            }
+
+            Fecha fecha;
+            fecha.setFecha(dia, mes, anio);
+
+            Libro nuevoLibro(ISBN, titulo, autor, editorial, fecha, ejemplares, genero, true);
+            biblioteca.libros.agregarLibro(nuevoLibro);
+
+            cout << "\nLibro agregado correctamente.\n\n";
+            system("pause");
         }
         else if (opcion == 2)
         {
             // Quitar libro.
+            system("cls");
+
+            char ISBN[14];
+            cout << "Ingrese ISBN del libro a eliminar: ";
+            cin >> ISBN;
+
+            bool exito = biblioteca.libros.quitarLibro(ISBN);
+
+            system("cls");
+            if (exito)
+                cout << "Libro eliminado correctamente.\n\n";
+            else
+                cout << "No existe ningun libro con ese ISBN.\n\n";
+
+            system("pause");
         }
         else if (opcion == 3)
         {
@@ -204,6 +290,7 @@ void menuLibros(Biblioteca biblioteca)
     }
 
 }
+
 
 /*void menuPrincipal(Biblioteca biblioteca)
 {
