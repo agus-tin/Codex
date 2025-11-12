@@ -15,17 +15,20 @@ void ArchivoLibros::agregarLibro(Libro& libro)
     libros.push_back(libro);
 }
 
-void ArchivoLibros::quitarLibro(const char* ISBN)
+bool ArchivoLibros::quitarLibro(const char* ISBN)
 {
     for (auto i = libros.begin(); i != libros.end(); ++i)
     {
         if (std::strcmp(i->getISBN(), ISBN) == 0)
         {
             libros.erase(i);
-            break;
+            guardar();
+            return true;
         }
     }
+    return false;
 }
+
 
 void ArchivoLibros::listarLibros()
 {
