@@ -26,7 +26,7 @@ public:
     Fecha getFechaDevolucion() const { return _fechaDevolucion; }
 
     void setFechaDevolucion(Fecha fechaDevolucion);
-    void setEstado(bool estado);
+    void setEstado(bool estado) { _estado = estado; }
 
     static int getID() { return prestamoID; }
     static void setID(int ID) { prestamoID = ID; }

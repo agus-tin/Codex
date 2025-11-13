@@ -6,6 +6,7 @@
 #include <iostream>
 #include <direct.h>
 #include "Socio.h"
+#include "rlutil.h"
 
 class ArchivoSocios
 {
@@ -17,8 +18,7 @@ public:
     ~ArchivoSocios();
 
     void agregarSocio(Socio& socio);
-    //void quitarSocio(int socioID);
-    bool quitarSocio(int socioID);
+    void quitarSocio(int socioID);
     void listarSocios();
 
     void cargar();

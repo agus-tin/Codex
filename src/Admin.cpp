@@ -11,7 +11,7 @@ const char* rolString(Rol rol)
     }
 }
 
-int Admin::adminID = 0;
+int Admin::adminID = 1;
 
 Admin::Admin()
     : Persona()

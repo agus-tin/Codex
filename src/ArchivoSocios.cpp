@@ -15,7 +15,7 @@ void ArchivoSocios::agregarSocio(Socio& socio)
     socios.push_back(socio);
 }
 
-/*void ArchivoSocios::quitarSocio(int socioID)
+void ArchivoSocios::quitarSocio(int socioID)
 {
     for (auto i = socios.begin(); i != socios.end(); ++i)
     {
@@ -25,27 +25,15 @@ void ArchivoSocios::agregarSocio(Socio& socio)
             return;
         }
     }
-}*/
-
-bool ArchivoSocios::quitarSocio(int socioID)
-{
-    for (auto i = socios.begin(); i != socios.end(); ++i)
-    {
-        if (i->getSocioID() == socioID)
-        {
-            socios.erase(i);
-            guardar();  // actualiza el archivo después de borrar
-            return true;  
-        }
-    }
-
-    // Si termina el for sin encontrar el ID
-    return false;
 }
 
 void ArchivoSocios::listarSocios()
 {
+    rlutil::saveDefaultColor();
+
+    rlutil::setColor(rlutil::CYAN);
     std::cout << "---- LISTADO DE SOCIOS ----" << "\n\n";
+    rlutil::resetColor();
 
     if (socios.empty())
     {

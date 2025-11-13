@@ -28,7 +28,11 @@ void ArchivoPrestamos::quitarPrestamo(int prestamoID)
 }
 void ArchivoPrestamos::listarPrestamos()
 {
+    rlutil::saveDefaultColor();
+
+    rlutil::setColor(rlutil::LIGHTBLUE);
     std::cout << "---- LISTADO DE PRESTAMOS ----" << "\n\n";
+    rlutil::resetColor();
 
     if (prestamos.empty())
     {
@@ -41,6 +45,18 @@ void ArchivoPrestamos::listarPrestamos()
         std::cout << prestamo << '\n';
     }
 }
+
+void ArchivoPrestamos::cambiarFechaDevolucion(int prestamoID, Fecha fechaDevolucion)
+{
+    for (auto& prestamo : prestamos)
+    {
+        if (prestamo.getPrestamoID() == prestamoID)
+        {
+            prestamo.setFechaDevolucion(fechaDevolucion);
+        }
+    }
+}
+
 void ArchivoPrestamos::cargar()
 {
     prestamos.clear();

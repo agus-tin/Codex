@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Socio.h"
 
+int Socio::socioID = 1;
+
 Socio::Socio()
     : Persona()
 {
@@ -18,8 +20,6 @@ Socio::Socio(int DNI,
 {
     _socioID = socioID++;
 }
-
-int Socio::socioID = 0;
 
 std::ostream& operator<<(std::ostream& os, const Socio& socio)
 {

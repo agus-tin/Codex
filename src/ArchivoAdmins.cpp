@@ -54,7 +54,11 @@ void ArchivoAdmins::quitarAdmin(int adminID)
 
 void ArchivoAdmins::listarAdmins()
 {
+    rlutil::saveDefaultColor();
+
+    rlutil::setColor(rlutil::GREEN);
     std::cout << "--- LISTADO DE USUARIOS ---" << "\n\n";
+    rlutil::resetColor();
 
     if (admins.empty())
     {

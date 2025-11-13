@@ -73,17 +73,31 @@ void Libro::setISBN(const char* ISBN)
     }
 }
 
+void Libro::setCantidadEjemplares(int cantidadEjemplares)
+{
+    _cantidadEjemplares == cantidadEjemplares;
+
+    if (_cantidadEjemplares > 0)
+    {
+        _estado = true;
+    }
+    else
+    {
+        _estado = false;
+    }
+}
+
 std::ostream& operator<<(std::ostream& os, const Libro& libro)
 {
     os << "  ISBN: " << libro._ISBN << '\n';
-    os << " Titulo: " << libro._titulo << '\n';
+    os << "  Titulo: " << libro._titulo << '\n';
     os << "  Autor: " << libro._autor << '\n';
     os << "  Editorial: " << libro._editorial << '\n';
     os << "  Genero: " << libro._genero << '\n';
     os << "  Fecha de publicacion: " << libro._fechaPublicacion << '\n';
     os << "  Estado: " << (libro._estado ? "Disponible" : "No disponible") << '\n';
     if (libro._estado)
-        os << "Cantidad de ejemplares: " << libro._cantidadEjemplares << '\n';
+        os << "  Cantidad de ejemplares: " << libro._cantidadEjemplares << '\n';
 
     return os;
 }

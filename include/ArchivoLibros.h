@@ -7,6 +7,7 @@
 #include <direct.h>
 #include "Libro.h"
 #include "Genero.h"
+#include "rlutil.h"
 
 class ArchivoLibros
 {
@@ -20,6 +21,10 @@ public:
     void agregarLibro(Libro& libro);
     bool quitarLibro(const char* ISBN); // Es un char array [14].
     void listarLibros();
+
+    void modificarCantidadEjemplares(const char* ISBN, int cantidadEjemplares);
+    Libro buscarPorISBN(const char* ISBN);
+    std::vector<Libro> buscarPorGenero(Genero genero);
 
     void cargar();
     void guardar();

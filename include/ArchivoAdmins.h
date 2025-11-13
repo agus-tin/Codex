@@ -6,6 +6,7 @@
 #include <iostream>
 #include <direct.h>
 #include "Admin.h"
+#include "rlutil.h"
 
 class ArchivoAdmins
 {

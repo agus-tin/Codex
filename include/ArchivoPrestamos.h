@@ -6,6 +6,7 @@
 #include <iostream>
 #include <direct.h>
 #include "Prestamo.h"
+#include "rlutil.h"
 
 class ArchivoPrestamos
 {
@@ -19,6 +20,7 @@ public:
     void agregarPrestamo(Prestamo& prestamo);
     void quitarPrestamo(int prestamoID);
     void listarPrestamos();
+    void cambiarFechaDevolucion(int prestamoID, Fecha fechaDevolucion);
 
     void cargar();
     void guardar();

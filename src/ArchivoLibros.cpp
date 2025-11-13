@@ -22,7 +22,6 @@ bool ArchivoLibros::quitarLibro(const char* ISBN)
         if (std::strcmp(i->getISBN(), ISBN) == 0)
         {
             libros.erase(i);
-            guardar();
             return true;
         }
     }
@@ -32,7 +31,11 @@ bool ArchivoLibros::quitarLibro(const char* ISBN)
 
 void ArchivoLibros::listarLibros()
 {
+    rlutil::saveDefaultColor();
+
+    rlutil::setColor(rlutil::LIGHTRED);
     std::cout << "---- LISTADO DE LIBROS ----\n\n";
+    rlutil::resetColor();
 
     if (libros.empty())
     {
@@ -46,6 +49,41 @@ void ArchivoLibros::listarLibros()
     }
 }
 
+void ArchivoLibros::modificarCantidadEjemplares(const char* ISBN, int cantidadEjemplares)
+{
+    for (auto& libro : libros)
+    {
+        if (std::strcmp(libro.getISBN(), ISBN) == 0)
+        {
+            libro.setCantidadEjemplares(cantidadEjemplares);
+        }
+    }
+}
+
+Libro ArchivoLibros::buscarPorISBN(const char* ISBN)
+{
+    for (auto& libro : libros)
+    {
+        if (std::strcmp(libro.getISBN(), ISBN) == 0)
+        {
+            return libro;
+        }
+    }
+}
+
+std::vector<Libro> ArchivoLibros::buscarPorGenero(Genero genero)
+{
+    std::vector<Libro> resultados;
+
+    for (auto& libro : libros)
+    {
+        if (libro.getGenero() == genero)
+        {
+            resultados.push_back(libro);
+        }
+    }
+    return resultados;
+}
 
 void ArchivoLibros::cargar()
 {

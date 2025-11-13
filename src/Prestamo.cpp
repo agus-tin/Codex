@@ -1,6 +1,6 @@
 #include "Prestamo.h"
 
-int Prestamo::prestamoID = 0;
+int Prestamo::prestamoID = 1;
 
 Prestamo::Prestamo()
 {
@@ -19,11 +19,6 @@ Prestamo::Prestamo(const char* ISBN, int socioID, Fecha fechaDevolucion)
 void Prestamo::setFechaDevolucion(Fecha fechaDevolucion)
 {
     _fechaDevolucion = fechaDevolucion;
-}
-
-void Prestamo::setEstado(bool estado)
-{
-    _estado = estado;
 }
 
 std::ostream& operator<<(std::ostream& os, const Prestamo& prestamo)
