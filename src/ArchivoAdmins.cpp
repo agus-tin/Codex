@@ -8,6 +8,10 @@ bool ArchivoAdmins::validarPrivilegios(const char* usuario)
         {
             return true;
         }
+        else
+        {
+            return false;
+        }
     }
 }
 
