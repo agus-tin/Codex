@@ -15,7 +15,8 @@ enum class Genero
     Linguistica,
     Arte,
     Misterio,
-    Biografia
+    Biografia,
+    Ficcion
 };
 
 inline std::ostream& operator<<(std::ostream& os, const Genero& genero)
@@ -33,6 +34,7 @@ inline std::ostream& operator<<(std::ostream& os, const Genero& genero)
         case Genero::Arte: os << "Arte"; break;
         case Genero::Misterio: os << "Misterio"; break;
         case Genero::Biografia: os << "Biografia"; break;
+        case Genero::Ficcion: os << "Ficcion"; break;
     }
     return os;
 }

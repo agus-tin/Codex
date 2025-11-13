@@ -31,6 +31,9 @@ int main()
     //Admin admin1(12345678, "Sys", "Admin", Fecha(1,1,2000), 1234567890, true, "agustinvalle23@gmail.com", "SYSADMIN", "12345", Rol::SysAdmin);
     //Libro libro1("9781138627000", "Real-Time Rendering", "Tomas Akenine-Moller, et al", "CRC Press", Fecha(6, 8, 2018), 1, Genero::Informatica);
     //Libro libro2("9780201835953", "Mythical Man-Month", "Frederick Brooks Jr.", "Addison-Wesley Professional", Fecha(2, 8, 1995), 2, Genero::Informatica);
+    //Libro libro3("9780387962016", "A first course in calculus", "Serge Lang", "Springer", Fecha(15, 1, 1986), 7, Genero::Matematica);
+    //Libro libro4("9780387964126", "Linear Algebra", "Serge Lang", "Springer", Fecha(26, 1, 1987), 3, Genero::Matematica);
+    //Libro libro5("9789877252941", "Bestiario", "Julio Cortazar", "Debolsillo", Fecha(27, 9, 2017), 5, Genero::Ficcion);
 
     //biblioteca.admins.agregarAdmin(admin1);
     //biblioteca.libros.agregarLibro(libro1);
@@ -327,10 +330,11 @@ void menuLibros(Biblioteca& biblioteca)
                 std::cout << "   9. Arte." << '\n';
                 std::cout << "   10. Misterio." << '\n';
                 std::cout << "   11. Biografia." << '\n';
+                std::cout << "   12. Ficcion." << '\n';
 
                 int opcionGenero;
 
-                if (!(std::cin >> opcionGenero) || opcionGenero < 1 || opcionGenero > 11)
+                if (!(std::cin >> opcionGenero) || opcionGenero < 1 || opcionGenero > 12)
                 {
                     std::cin.clear();
                     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -472,10 +476,11 @@ void menuLibros(Biblioteca& biblioteca)
                         std::cout << "   9. Arte." << '\n';
                         std::cout << "   10. Misterio." << '\n';
                         std::cout << "   11. Biografia." << '\n';
+                        std::cout << "   12. Ficcion." << '\n';
 
                         int opcionGenero;
 
-                        if (!(std::cin >> opcionGenero) || opcionGenero < 1 || opcionGenero > 11)
+                        if (!(std::cin >> opcionGenero) || opcionGenero < 1 || opcionGenero > 12)
                         {
                             std::cin.clear();
                             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');

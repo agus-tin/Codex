@@ -75,7 +75,7 @@ void Libro::setISBN(const char* ISBN)
 
 void Libro::setCantidadEjemplares(int cantidadEjemplares)
 {
-    _cantidadEjemplares == cantidadEjemplares;
+    _cantidadEjemplares = cantidadEjemplares;
 
     if (_cantidadEjemplares > 0)
     {
