@@ -23,6 +23,8 @@ public:
 
     bool existeSocio(int socioID);
 
+    void cambiarTelefono(int telefono, int socioID);
+
     void cargar();
     void guardar();
 

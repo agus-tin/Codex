@@ -47,6 +47,17 @@ void ArchivoSocios::listarSocios()
     }
 }
 
+void ArchivoSocios::cambiarTelefono(int telefono, int socioID)
+{
+    for (auto& socio : socios)
+    {
+        if (socio.getSocioID() == socioID)
+        {
+            socio.setTelefono(telefono);
+        }
+    }
+}
+
 
 bool ArchivoSocios::existeSocio(int socioID)
 {

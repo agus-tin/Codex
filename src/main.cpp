@@ -1257,7 +1257,8 @@ void menuSocios(Biblioteca& biblioteca)
         std::cout << "1. Agregar socio." << '\n';
         std::cout << "2. Quitar socio." << '\n';
         std::cout << "3. Listar socios." << '\n';
-        std::cout << "4. Volver al menu principal." << "\n\n";
+        std::cout << "4. Modificar telefono." << '\n';
+        std::cout << "5. Volver al menu principal." << "\n\n";
 
         opcion = validarInput(opcion);
 
@@ -1488,6 +1489,79 @@ void menuSocios(Biblioteca& biblioteca)
             system("cls");
         }
         else if (opcion == 4)
+        {
+            system("cls");
+
+            int socioID;
+            int telefono;
+
+            while (true)
+            {
+
+                std::cout << "Escriba el ID del socio que quiera modficar: ";
+
+                socioID = validarInput(socioID);
+
+                if (socioID > 0)
+                {
+                    break;
+                }
+                else
+                {
+                    system("cls");
+                    std::cout << "ID de socio invalido, pruebe de nuevo." << "\n\n";
+                    system("pause");
+                    system("cls");
+                }
+
+            }
+
+            bool existeSocio = biblioteca.socios.existeSocio(socioID);
+
+            if (existeSocio)
+            {
+                while (true)
+                {
+                    std::cout << "Telefono (10 digitos): ";
+
+                    if (!(std::cin >> telefono))
+                    {
+                        std::cin.clear();
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                        system("cls");
+                        std::cout << "Telefono invalido, pruebe de nuevo." << '\n';
+                        system("pause");
+                        system("cls");
+                        continue;
+                    }
+
+                    if (validarTelefono(telefono))
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        system("cls");
+                        std::cout << "Telefono invalido, pruebe de nuevo." << "\n\n";
+                        system("pause");
+                        system("cls");
+                    }
+                }
+
+                biblioteca.socios.cambiarTelefono(telefono, socioID);
+            }
+            else
+            {
+                system("cls");
+                std::cout << "El socio no esta registrado." << "\n\n";
+                system("pause");
+                system("cls");
+            }
+
+
+        }
+
+        else if (opcion == 5)
         {
             break;
         }

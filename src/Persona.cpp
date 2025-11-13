@@ -120,7 +120,7 @@ void Persona::setFechaNacimiento(int dia, int mes, int anio)
 
 void Persona::setTelefono(int telefono)
 {
-    if (validarTelefono(telefono)) _telefono = telefono;
+    _telefono = telefono;
 }
 
 void Persona::setEstado(bool estado)
