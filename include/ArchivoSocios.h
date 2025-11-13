@@ -24,6 +24,7 @@ public:
     bool existeSocio(int socioID);
 
     void cambiarTelefono(int telefono, int socioID);
+//bool modoficarTelefono(int socioID, int nuevoTelefono);
 
     void cargar();
     void guardar();
