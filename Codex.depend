@@ -107,7 +107,7 @@
 
 1761772693 d:\repositorios\codex\rol.h
 
-1762989356 source:d:\repositorios\codex\src\admin.cpp
+1762991143 source:d:\repositorios\codex\src\admin.cpp
 	"Admin.h"
 
 1762989357 d:\repositorios\codex\include\admin.h
@@ -184,7 +184,7 @@
 	<iostream>
 	"Socio.h"
 
-1762991086 source:d:\repositorios\codex\src\main.cpp
+1762992106 source:d:\repositorios\codex\src\main.cpp
 	<iostream>
 	<vector>
 	<string>
@@ -211,7 +211,7 @@
 	<sys/types.h>
 	<sys/time.h>
 
-1762976711 source:d:\repositorios\codex\src\archivolibros.cpp
+1762991782 source:d:\repositorios\codex\src\archivolibros.cpp
 	"ArchivoLibros.h"
 
 1762987416 source:d:\repositorios\codex\src\archivoprestamos.cpp
@@ -220,10 +220,10 @@
 1762990911 source:d:\repositorios\codex\src\archivoadmins.cpp
 	"ArchivoAdmins.h"
 
-1762981174 source:d:\repositorios\codex\src\archivosocios.cpp
+1762991782 source:d:\repositorios\codex\src\archivosocios.cpp
 	"ArchivoSocios.h"
 
-1762876466 d:\repositorios\codex\include\archivolibros.h
+1762991782 d:\repositorios\codex\include\archivolibros.h
 	<vector>
 	<fstream>
 	<iostream>
@@ -244,7 +244,7 @@
 	<direct.h>
 	"Admin.h"
 
-1762955946 d:\repositorios\codex\include\archivosocios.h
+1762991782 d:\repositorios\codex\include\archivosocios.h
 	<vector>
 	<fstream>
 	<iostream>

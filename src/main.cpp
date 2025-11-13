@@ -27,11 +27,11 @@ int main()
 
     // Esto es código de prueba.
 
-    Admin admin1(11111111, "nombre", "apellido", Fecha(1,1,1900), 1111111111, true, "a@a.com", "123", "456789", Rol::SysAdmin);
+    //Admin admin1(11111111, "nombre", "apellido", Fecha(1,1,1900), 1111111111, true, "a@a.com", "a", "b", Rol::SysAdmin);
     //Libro libro1("9781138627000", "Real-Time Rendering", "Tomas Akenine-Moller, et al", "CRC Press", Fecha(6, 8, 2018), 1, Genero::Informatica);
     //Libro libro2("9780201835953", "Mythical Man-Month", "Frederick Brooks Jr.", "Addison-Wesley Professional", Fecha(2, 8, 1995), 2, Genero::Informatica);
 
-    biblioteca.admins.agregarAdmin(admin1);
+    //biblioteca.admins.agregarAdmin(admin1);
     //biblioteca.libros.agregarLibro(libro1);
     //biblioteca.libros.agregarLibro(libro2);
 
