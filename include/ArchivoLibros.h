@@ -26,6 +26,8 @@ public:
     Libro buscarPorISBN(const char* ISBN);
     std::vector<Libro> buscarPorGenero(Genero genero);
 
+    bool existeLibro(const char* ISBN);
+
     void cargar();
     void guardar();
 

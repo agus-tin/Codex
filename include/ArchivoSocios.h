@@ -21,6 +21,8 @@ public:
     void quitarSocio(int socioID);
     void listarSocios();
 
+    bool existeSocio(int socioID);
+
     void cargar();
     void guardar();
 

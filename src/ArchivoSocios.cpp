@@ -47,6 +47,23 @@ void ArchivoSocios::listarSocios()
     }
 }
 
+
+bool ArchivoSocios::existeSocio(int socioID)
+{
+    for (auto& socio : socios)
+    {
+        if (socio.getSocioID() == socioID)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+}
+
+
 void ArchivoSocios::cargar()
 {
     socios.clear();

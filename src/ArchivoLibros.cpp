@@ -71,6 +71,21 @@ Libro ArchivoLibros::buscarPorISBN(const char* ISBN)
     }
 }
 
+bool ArchivoLibros::existeLibro(const char* ISBN)
+{
+    for (auto& libro : libros)
+    {
+        if (std::strcmp(libro.getISBN(), ISBN) == 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+}
+
 std::vector<Libro> ArchivoLibros::buscarPorGenero(Genero genero)
 {
     std::vector<Libro> resultados;

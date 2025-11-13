@@ -562,28 +562,42 @@ void menuLibros(Biblioteca& biblioteca)
                 }
             }
 
-            int cantidadEjemplares;
+            bool existeLibro = biblioteca.libros.existeLibro(ISBN);
 
-            while (true)
+            if (existeLibro)
             {
-                std::cout << "Ingrese la nueva cantidad de ejemplares: ";
+                int cantidadEjemplares;
 
-                cantidadEjemplares = validarInput(cantidadEjemplares);
+                while (true)
+                {
+                    std::cout << "Ingrese la nueva cantidad de ejemplares: ";
 
-                if (!(cantidadEjemplares < 0))
-                {
-                    break;
+                    cantidadEjemplares = validarInput(cantidadEjemplares);
+
+                    if (!(cantidadEjemplares < 0))
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        system("cls");
+                        std::cout << "Cantidad de ejemplares no valida, pruebe de nuevo." << "\n\n";
+                        system("pause");
+                        system("cls");
+                    }
                 }
-                else
-                {
-                    system("cls");
-                    std::cout << "Cantidad de ejemplares no valida, pruebe de nuevo." << "\n\n";
-                    system("pause");
-                    system("cls");
-                }
-            }
 
                 biblioteca.libros.modificarCantidadEjemplares(ISBN, cantidadEjemplares);
+            }
+            else
+            {
+                system("cls");
+                std::cout << "El libro no esta en la coleccion." << "\n\n";
+                system("pause");
+                system("cls");
+            }
+
+
 
         }
         else if (opcion == 6)
@@ -651,79 +665,108 @@ void menuPrestamos(Biblioteca& biblioteca)
                 }
             }
 
-            // socioID
-            while (true)
+            bool libroExiste = biblioteca.libros.existeLibro(ISBN);
+
+            if (libroExiste)
             {
-                std::cout << "Escriba el ID del socio que haya hecho el prestamo: ";
-
-                socioID = validarInput(socioID);
-
-                if (socioID > 0)
+                // socioID
+                while (true)
                 {
-                    break;
+                    std::cout << "Escriba el ID del socio que haya hecho el prestamo: ";
+
+                    socioID = validarInput(socioID);
+
+                    if (socioID > 0)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        system("cls");
+                        std::cout << "ID de socio invalido, pruebe de nuevo." << "\n\n";
+                        system("pause");
+                        system("cls");
+                    }
+                }
+
+                bool existeSocio = biblioteca.socios.existeSocio(socioID);
+
+                if (existeSocio)
+                {
+                    // Fecha de devolución
+                    while (true)
+                    {
+                        int dia, mes, anio;
+
+                        std::cout << "Fecha de devolucion:" << '\n';
+
+                        std::cout << "   Dia: ";
+                        if (!(std::cin >> dia) || dia < 1 || dia > 31)
+                        {
+                            std::cin.clear();
+                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+                            system("cls");
+                            std::cout << "Dia invalido." << "\n\n";
+                            system("pause");
+                            system("cls");
+                            continue;
+                        }
+
+                        std::cout << "   Mes: ";
+                        if (!(std::cin >> mes) || mes < 1 || mes > 12)
+                        {
+                            std::cin.clear();
+                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+                            system("cls");
+                            std::cout << "Mes invalido." << "\n\n";
+                            system("pause");
+                            system("cls");
+                            continue;
+                        }
+
+                        std::cout << "   Anio: ";
+                        if (!(std::cin >> anio) || anio < 1900 || anio > 2030)
+                        {
+                            std::cin.clear();
+                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+                            system("cls");
+                            std::cout << "Anio invalido." << "\n\n";
+                            system("pause");
+                            system("cls");
+                            continue;
+                        }
+
+                        fechaDevolucion.setFecha(dia, mes, anio);
+                        break;
+                    }
+
+                    Prestamo prestamo(ISBN, socioID, fechaDevolucion);
+
+                    biblioteca.prestamos.agregarPrestamo(prestamo);
                 }
                 else
                 {
                     system("cls");
-                    std::cout << "ID de socio invalido, pruebe de nuevo." << "\n\n";
+                    std::cout << "El socio no esta registrado." << "\n\n";
                     system("pause");
                     system("cls");
                 }
-            }
 
-            // Fecha de devolución
-            while (true)
+
+            }
+            else
             {
-                int dia, mes, anio;
-
-                std::cout << "Fecha de devolucion:" << '\n';
-
-                std::cout << "   Dia: ";
-                if (!(std::cin >> dia) || dia < 1 || dia > 31)
-                {
-                    std::cin.clear();
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-                    system("cls");
-                    std::cout << "Dia invalido." << "\n\n";
-                    system("pause");
-                    system("cls");
-                    continue;
-                }
-
-                std::cout << "   Mes: ";
-                if (!(std::cin >> mes) || mes < 1 || mes > 12)
-                {
-                    std::cin.clear();
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-                    system("cls");
-                    std::cout << "Mes invalido." << "\n\n";
-                    system("pause");
-                    system("cls");
-                    continue;
-                }
-
-                std::cout << "   Anio: ";
-                if (!(std::cin >> anio) || anio < 1900 || anio > 2030)
-                {
-                    std::cin.clear();
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-                    system("cls");
-                    std::cout << "Anio invalido." << "\n\n";
-                    system("pause");
-                    system("cls");
-                    continue;
-                }
-
-                fechaDevolucion.setFecha(dia, mes, anio);
-                break;
+                system("cls");
+                std::cout << "El libro no esta en la coleccion." << "\n\n";
+                system("pause");
+                system("cls");
             }
 
-            Prestamo prestamo(ISBN, socioID, fechaDevolucion);
 
-            biblioteca.prestamos.agregarPrestamo(prestamo);
+
         }
         else if (opcion == 2)
         {
@@ -790,6 +833,8 @@ void menuPrestamos(Biblioteca& biblioteca)
                     system("cls");
                 }
             }
+
+            //bool existeLibro = biblioteca.libros.existeLibro();
 
             Fecha fechaDevolucion;
 
