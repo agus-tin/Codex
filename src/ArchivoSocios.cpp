@@ -117,3 +117,19 @@ void ArchivoSocios::guardar()
     }
     archivo.close();
 }
+/*bool ArchivoSocios::modoficarTelefono(int socioID, int nuevoTelefono){
+
+ if (!validarTelefono(nuevoTelefono)){
+ std::cout <<"telefono invalido.\n";
+
+ return false;
+ }
+ for (auto& socio: socios){
+    if ( socio.getSocioID () == socioID){
+        socio.setTelefono(nuevoTelefono);
+        return true;
+    }
+ }
+  return false;
+ };
+*/
